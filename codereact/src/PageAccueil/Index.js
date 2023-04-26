@@ -1,39 +1,39 @@
 import {
   Button,
   ButtonGroup,
-  Card,
-  CardContent,
-  CardMedia,
   Grid,
   Box,
   Typography,
   Paper,
 } from "@mui/material";
 import React from "react";
-import logo from "../logo.png";
+import { useNavigate } from "react-router";
+import Header from "../Utils/Component/header";
 
 export default function PageAccueil() {
+
+  const navigate = useNavigate()
+
+  const navigateHome = () => {
+    navigate('/')
+  }
+
+  const navigateConnexion = () => {
+    navigate('/Connexion')
+  }
+
+  const navigateMenu = () => {
+    navigate('/Menu')
+  }
+
   return (
     <Grid container direction="column" alignItems="center" justify="center">
-      <Grid>
-        <CardMedia
-          component="img"
-          image={logo}
-          alt="Logo"
-          sx={{ maxWidth: 500 }}
-        />
-        <CardContent>
-          <Typography gutterBottom component="div">
-            Produire - Transformer - Distribuer
-          </Typography>
-        </CardContent>
-      </Grid>
+      <Header />
       <Grid marginBottom={3}>
         <ButtonGroup variant="contained" color="success">
-          <Button>Accueil</Button>
-          <Button>Menu Bistro Boudreau</Button>
-          <Button>Menu Cafétéria Comme Chez Nous</Button>
-          <Button>S'identifier</Button>
+          <Button onClick={navigateHome} sx={{backgroundColor: '#9ab75f'}}>Accueil</Button>
+          <Button onClick={navigateMenu} sx={{backgroundColor: '#9ab75f'}}>Menu</Button>
+          <Button onClick={navigateConnexion} sx={{backgroundColor: '#9ab75f'}}>S'identifier</Button>
         </ButtonGroup>
       </Grid>
       <Grid>
