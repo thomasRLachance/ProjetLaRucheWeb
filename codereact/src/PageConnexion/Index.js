@@ -18,6 +18,10 @@ export default function PageConnexion() {
 
   const navigate = useNavigate();
 
+  const navigateHome = () => {
+    navigate("/");
+  };
+
   const handleChangeUser = (event) => {
     setUsername(event.target.value);
   };
@@ -66,7 +70,7 @@ export default function PageConnexion() {
               alignItems="center"
               spacing={2}
             >
-              <Button variant="contained" color="error">
+              <Button variant="contained" color="error" onClick={navigateHome}>
                 Retour
               </Button>
               <Button
