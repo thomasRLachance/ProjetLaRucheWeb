@@ -51,10 +51,12 @@ export default function PageConnexion() {
             backgroundColor: "#9ab75f",
           }}>
           <Box component="span">
-            <Typography variant="h3" gutterBottom>
+            <Typography variant="h3" gutterBottom color="white">
               S'identifier
             </Typography>
-            <Typography variant="body1">Nom d'utilisateur :</Typography>
+            <Typography variant="body1" color="white">
+              Nom d'utilisateur :
+            </Typography>
             <Input
               type="text"
               onChange={handleChangeUser}
@@ -62,7 +64,9 @@ export default function PageConnexion() {
             />
             <br />
             <br />
-            <Typography variant="body1">Mot de passe :</Typography>
+            <Typography variant="body1" color="white">
+              Mot de passe :
+            </Typography>
             <Input
               type="password"
               onChange={handleChangePassword}
