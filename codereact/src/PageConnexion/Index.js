@@ -53,7 +53,6 @@ export default function PageConnexion() {
           <Paper
             sx={{
               p: 2,
-              marginBottom: 3,
             }}>
             <Box component="span">
               <Typography variant="h3" gutterBottom>
