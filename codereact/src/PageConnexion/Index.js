@@ -10,6 +10,7 @@ import {
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import Header from "../Utils/Component/header";
+import NavigationBar from "../Utils/Component/navigationBar";
 
 export default function PageConnexion() {
   const [username, setUsername] = useState("");
@@ -38,12 +39,17 @@ export default function PageConnexion() {
   return (
     <Grid container direction="column" alignItems="center" justify="center">
       <Header />
+      <NavigationBar />
       <Grid>
         <Paper
           textAlign="center"
           elevation={3}
-          sx={{ p: 2, width: 750, marginBottom: 3, backgroundColor: "#9ab75f" }}
-        >
+          sx={{
+            p: 2,
+            width: 450,
+            marginBottom: 3,
+            backgroundColor: "#9ab75f",
+          }}>
           <Box component="span">
             <Typography variant="h3" gutterBottom>
               S'identifier
@@ -68,16 +74,14 @@ export default function PageConnexion() {
               direction="row"
               justifyContent="space-between"
               alignItems="center"
-              spacing={2}
-            >
+              spacing={2}>
               <Button variant="contained" color="error" onClick={navigateHome}>
                 Retour
               </Button>
               <Button
                 onClick={handleSubmit}
                 variant="contained"
-                color="secondary"
-              >
+                color="secondary">
                 Se connecter
               </Button>
             </Stack>

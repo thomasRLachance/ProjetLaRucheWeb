@@ -1,47 +1,18 @@
-import {
-  Button,
-  ButtonGroup,
-  Grid,
-  Box,
-  Typography,
-  Paper,
-} from "@mui/material";
+import { Grid, Box, Typography, Paper } from "@mui/material";
 import React from "react";
-import { useNavigate } from "react-router";
 import Header from "../Utils/Component/header";
+import NavigationBar from "../Utils/Component/navigationBar";
 
 export default function PageAccueil() {
-
-  const navigate = useNavigate()
-
-  const navigateHome = () => {
-    navigate('/')
-  }
-
-  const navigateConnexion = () => {
-    navigate('/Connexion')
-  }
-
-  const navigateMenu = () => {
-    navigate('/Menu')
-  }
-
   return (
     <Grid container direction="column" alignItems="center" justify="center">
       <Header />
-      <Grid marginBottom={3}>
-        <ButtonGroup variant="contained" color="success">
-          <Button onClick={navigateHome} sx={{backgroundColor: '#9ab75f'}}>Accueil</Button>
-          <Button onClick={navigateMenu} sx={{backgroundColor: '#9ab75f'}}>Menu</Button>
-          <Button onClick={navigateConnexion} sx={{backgroundColor: '#9ab75f'}}>S'identifier</Button>
-        </ButtonGroup>
-      </Grid>
+      <NavigationBar />
       <Grid>
         <Paper
           textAlign="center"
           elevation={3}
-          sx={{ p: 2, width: 750, marginBottom: 3 }}
-        >
+          sx={{ p: 2, width: 750, marginBottom: 3 }}>
           <Box component="span">
             <Typography variant="h3" gutterBottom>
               Qui sommes-nous?
