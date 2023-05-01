@@ -50,46 +50,51 @@ export default function PageConnexion() {
             marginBottom: 3,
             backgroundColor: "#9ab75f",
           }}>
-          <Box component="span">
-            <Typography variant="h3" gutterBottom color="white">
-              S'identifier
-            </Typography>
-            <Typography variant="body1" color="white">
-              Nom d'utilisateur :
-            </Typography>
-            <Input
-              type="text"
-              onChange={handleChangeUser}
-              placeholder="Nom d'utilisateur"
-            />
-            <br />
-            <br />
-            <Typography variant="body1" color="white">
-              Mot de passe :
-            </Typography>
-            <Input
-              type="password"
-              onChange={handleChangePassword}
-              placeholder="Mot de passe"
-            />
-            <br />
-            <br />
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              spacing={2}>
-              <Button variant="contained" color="error" onClick={navigateHome}>
-                Retour
-              </Button>
-              <Button
-                onClick={handleSubmit}
-                variant="contained"
-                color="secondary">
-                Se connecter
-              </Button>
-            </Stack>
-          </Box>
+          <Paper
+            sx={{
+              p: 2,
+              marginBottom: 3,
+            }}>
+            <Box component="span">
+              <Typography variant="h3" gutterBottom>
+                S'identifier
+              </Typography>
+              <Typography variant="body1">Nom d'utilisateur :</Typography>
+              <Input
+                type="text"
+                onChange={handleChangeUser}
+                placeholder="Nom d'utilisateur"
+              />
+              <br />
+              <br />
+              <Typography variant="body1">Mot de passe :</Typography>
+              <Input
+                type="password"
+                onChange={handleChangePassword}
+                placeholder="Mot de passe"
+              />
+              <br />
+              <br />
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                spacing={2}>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={navigateHome}>
+                  Retour
+                </Button>
+                <Button
+                  onClick={handleSubmit}
+                  variant="contained"
+                  color="secondary">
+                  Se connecter
+                </Button>
+              </Stack>
+            </Box>
+          </Paper>
         </Paper>
       </Grid>
     </Grid>
