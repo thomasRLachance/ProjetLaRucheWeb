@@ -1,8 +1,9 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import PageAccueil from "./PageAccueil/Index";
-import PageConnexion from "./PageConnexion/Index";
-import PageMenu from "./PageMenu/Index";
+import PageAccueil from "./Pages/PageAccueil/Index";
+import PageConnexion from "./Pages/PageConnexion/Index";
+import PageMenu from "./Pages/PageMenu/Index";
+import PagePanier from "./Pages/PagePanier/Index";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route exact path="/" element={<PageAccueil />} />
         <Route exact path="/Connexion" element={<PageConnexion />} />
         <Route exact path="/Menu" element={<PageMenu />} />
+        <Route exact path="/Connecter" element={<PagePanier />} />
       </Routes>
     </div>
   );

@@ -1,7 +1,7 @@
 import { Grid, Box, Typography, Paper } from "@mui/material";
 import React from "react";
-import Header from "../Utils/Component/header";
-import NavigationBar from "../Utils/Component/navigationBar";
+import Header from "../../Utils/Component/header";
+import NavigationBar from "../../Utils/Component/navigationBar";
 
 export default function PageAccueil() {
   return (
@@ -12,7 +12,8 @@ export default function PageAccueil() {
         <Paper
           textAlign="center"
           elevation={3}
-          sx={{ p: 2, width: 750, marginBottom: 3 }}>
+          sx={{ p: 2, width: 750, marginBottom: 3 }}
+        >
           <Box component="span">
             <Typography variant="h3" gutterBottom>
               Qui sommes-nous?

@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid, Paper } from "@mui/material";
-import Header from "../Utils/Component/header";
+import Header from "../../Utils/Component/header";
 import StoreTable from "./component/storeTable";
-import NavigationBar from "../Utils/Component/navigationBar";
+import NavigationBar from "../../Utils/Component/navigationBar";
 
 function createData(name, price) {
   return { name, price };
@@ -48,7 +48,8 @@ export default function PageMenu() {
             width: 750,
             marginBottom: 3,
             backgroundColor: "#9ab75f",
-          }}>
+          }}
+        >
           <Grid container direction="row" spacing={2}>
             <Grid item xs={6}>
               <StoreTable rows={store1} title="Bistro Boudreau" />
