@@ -1,6 +1,4 @@
-import {
-  Grid,
-} from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
 import HeaderConnected from "../../Utils/Component/headerConnected";
 import AdminConnected from "./component/adminConnected";
@@ -23,10 +21,11 @@ export default function PagePanier() {
 
   return (
     <Grid container>
-      <HeaderConnected location={user.location} name={user.name}/>
-      {user.location === "Administration" && (<AdminConnected />)}
-      {user.location === "Bistro Boudreau" && (<p>Allo Bistro</p>)}
-      {user.location === "Caféteria Comme Chez nous" && (<p>Allo café</p>)}
+      <HeaderConnected location={user.location} name={user.name} />
+      {user.location === "Administration" && <AdminConnected />}
+      {user.location === "Bistro Boudreau" && <p>Allo Bistro</p>}
+      {user.location === "Caféteria Comme Chez nous" && <p>Allo café</p>}
+      {user.location === undefined && <p>Allo non connecter</p>}
     </Grid>
   );
 }
