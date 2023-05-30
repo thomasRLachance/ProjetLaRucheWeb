@@ -14,7 +14,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import React from "react";
 
-export default function EmployeTableMofiable({ rows, title }) {
+export default function EmployeTableMofiable({ rows, title, setIsOpen }) {
   return (
     <TableContainer component={Paper}>
       <Toolbar>
@@ -22,7 +22,7 @@ export default function EmployeTableMofiable({ rows, title }) {
           <Typography variant="h6" component="div">
             {title}
           </Typography>
-          <IconButton color="primary">
+          <IconButton color="primary" onClick={() => setIsOpen(true)}>
             <EditIcon />
           </IconButton>
         </Stack>
@@ -37,7 +37,7 @@ export default function EmployeTableMofiable({ rows, title }) {
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.location}
               sx={{
                 "&:last-child td, &:last-child th": { border: 0 },
               }}
@@ -45,7 +45,7 @@ export default function EmployeTableMofiable({ rows, title }) {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.price}</TableCell>
+              <TableCell align="right">{row.location}</TableCell>
             </TableRow>
           ))}
         </TableBody>

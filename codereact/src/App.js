@@ -5,6 +5,7 @@ import PageConnexion from "./Pages/PageConnexion/Index";
 import PageMenu from "./Pages/PageMenu/Index";
 import PagePanier from "./Pages/PagePanier/Index";
 import PageCalendrier from "./Pages/PageCalendrier/Index";
+import ErrorPage from "./Utils/ErrorPage/Index";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/Menu" element={<PageMenu />} />
         <Route exact path="/Connecter" element={<PagePanier />} />
         <Route exact path="/Calendrier" element={<PageCalendrier />} />
+        <Route exact path="/Erreur" element={<ErrorPage />} />
       </Routes>
     </div>
   );

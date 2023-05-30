@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import React from "react";
 import HeaderConnected from "../../Utils/Component/headerConnected";
 import AdminConnected from "./component/adminConnected";
+import { Navigate } from "react-router";
 
 export default function PagePanier() {
   const getLocation = (locationId) => {
@@ -25,7 +26,7 @@ export default function PagePanier() {
       {user.location === "Administration" && <AdminConnected />}
       {user.location === "Bistro Boudreau" && <p>Allo Bistro</p>}
       {user.location === "Caféteria Comme Chez nous" && <p>Allo café</p>}
-      {user.location === undefined && <p>Allo non connecter</p>}
+      {user.location === undefined && <Navigate replace to="/Erreur" />}
     </Grid>
   );
 }

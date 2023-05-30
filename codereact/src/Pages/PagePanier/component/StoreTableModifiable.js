@@ -14,7 +14,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import React from "react";
 
-export default function StoreTableMofiable({ rows, title }) {
+export default function StoreTableMofiable({ rows, title, setIsOpen }) {
   return (
     <TableContainer component={Paper}>
       <Toolbar>
@@ -22,7 +22,7 @@ export default function StoreTableMofiable({ rows, title }) {
           <Typography variant="h6" component="div">
             {title}
           </Typography>
-          <IconButton color="primary">
+          <IconButton color="primary" onClick={() => setIsOpen(true)}>
             <EditIcon />
           </IconButton>
         </Stack>
