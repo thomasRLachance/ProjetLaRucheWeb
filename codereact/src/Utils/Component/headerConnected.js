@@ -2,8 +2,15 @@ import React from "react";
 import { Typography, Box, CardMedia, Stack, IconButton } from "@mui/material";
 import logo from "../../logo.png";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import { useNavigate } from "react-router";
 
 export default function HeaderConnected({ name, location }) {
+  const navigate = useNavigate();
+
+  const navigateConnecter = () => {
+    navigate("/Connecter");
+  };
+
   return (
     <Box
       sx={{
@@ -28,7 +35,7 @@ export default function HeaderConnected({ name, location }) {
           {location}
         </Typography>
         <Typography variant="body1" color="white">
-          <IconButton>
+          <IconButton onClick={navigateConnecter}>
             {name}
             <AccountCircleRoundedIcon fontSize="large" />
           </IconButton>
