@@ -1,19 +1,9 @@
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  Grid,
-  IconButton,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Grid, IconButton, Paper, Typography } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import React, { useState } from "react";
 import StoreTableMofiable from "./StoreTableModifiable";
 import EmployeTableMofiable from "./EmployeTableModifiable";
 import { useNavigate } from "react-router";
-import DialogEdit from "../../../Utils/Component/DialogEditItem";
 import DialogEditItem from "../../../Utils/Component/DialogEditItem";
 import DialogEditEmploye from "../../../Utils/Component/DialogEditEmploye";
 

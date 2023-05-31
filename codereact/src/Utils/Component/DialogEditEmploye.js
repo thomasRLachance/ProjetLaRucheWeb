@@ -51,7 +51,7 @@ export default function DialogEditEmploye({ rows, title, open, setIsOpen }) {
         </Table>
       </TableContainer>
       <DialogActions>
-        <Button onClick={() => setIsOpen(false)}>Disagree</Button>
+        <Button onClick={() => setIsOpen(false)}>ANNULER</Button>
       </DialogActions>
     </Dialog>
   );

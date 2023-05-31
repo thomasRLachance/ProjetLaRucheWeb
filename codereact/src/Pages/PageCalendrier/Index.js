@@ -2,6 +2,8 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import React from "react";
 import { Navigate } from "react-router";
+import HeaderConnected from "../../Utils/Component/headerConnected";
+import { Grid, Paper } from "@mui/material";
 
 export default function PageCalendrier() {
   const getLocation = (locationId) => {
@@ -21,7 +23,19 @@ export default function PageCalendrier() {
   return (
     <>
       {user.location === undefined && <Navigate replace to="/Erreur" />}
-      <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" />
+      <HeaderConnected location={user.location} name={user.name} />
+      <Grid container justifyContent="center" alignItems="center">
+        <Paper
+          elevation={3}
+          sx={{
+            width: 1000,
+            padding: 1,
+            marginBottom: 2,
+          }}
+        >
+          <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" />
+        </Paper>
+      </Grid>
     </>
   );
 }
