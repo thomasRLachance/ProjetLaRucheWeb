@@ -1,21 +1,17 @@
 import { Grid, IconButton, Paper, Typography } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import React, { useState } from "react";
-import StoreTableMofiable from "./StoreTableModifiable";
-import EmployeTableMofiable from "./EmployeTableModifiable";
 import { useNavigate } from "react-router";
-import DialogEditItem from "../../../Utils/Component/DialogEditItem";
-import DialogEditEmploye from "../../../Utils/Component/DialogEditEmploye";
-
-function createData(name, price) {
-  return { name, price };
-}
+import DialogEditItem from "../../../../Utils/Component/DialogEditItem";
+import DialogEditEmploye from "../../../../Utils/Component/DialogEditEmploye";
+import EmployeTableMofiable from "./component/EmployeTableModifiable";
+import StoreTableMofiable from "./component/StoreTableModifiable";
 
 function createEmploye(name, location) {
   return { name, location };
 }
 
-export default function AdminConnected() {
+export default function AdminConnected({ store1, store2 }) {
   const [isBistroOpen, setIsBistroOpen] = useState(false);
   const [isCafeOpen, setIsCafeOpen] = useState(false);
   const [isEmployeOpen, setIsEmployeOpen] = useState(false);
@@ -26,38 +22,12 @@ export default function AdminConnected() {
     navigate("/Calendrier");
   };
 
-  const store1 = [
-    createData("Repas Chaud", "2.00$"),
-    createData("Jus de fruits", "0.50$"),
-    createData("Smoothie", "Gratuit"),
-    createData("Gatorade", "1.00$"),
-    createData("Collation", "1.00$"),
-    createData("Fruit", "0.50$"),
-    createData("Lait au chocolat", "1.00$"),
-    createData("Jus de légumes", "0.50$"),
-    createData("Yop", "1.00$"),
-    createData("Thé glacé", "1.00$"),
-    createData("Soupe", "Gratuit"),
-  ];
-
-  const store2 = [
-    createData("Repas Chaud", "3.00$"),
-    createData("Sub'Vanier", "2.00$"),
-    createData("Jus de fruits", "1.00$"),
-    createData("Smoothie", "1.00$"),
-    createData("Collation", "1.00$"),
-    createData("Fruit", "0.50$"),
-    createData("Lait au chocolat", "0.50$"),
-    createData("Jus de légumes", "0.50$"),
-    createData("Salade", "1.00$"),
-  ];
-
-  const employe = [
+  const [employe, setEmploye] = useState([
     createEmploye("Alexandra Fortin", "Caféteria Comme Chez Nous"),
     createEmploye("Samuelle Comtois", "Bistro Boudreau"),
     createEmploye("Éléana Crèvecoueur", "Bistro Boudreau"),
     createEmploye("Pascale Bouffard", "Administration"),
-  ];
+  ]);
 
   return (
     <>

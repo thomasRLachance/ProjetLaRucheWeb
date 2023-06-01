@@ -3,7 +3,7 @@ import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import React from "react";
 import { Navigate } from "react-router";
 import HeaderConnected from "../../Utils/Component/headerConnected";
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 
 export default function PageCalendrier() {
   const getLocation = (locationId) => {
@@ -33,6 +33,9 @@ export default function PageCalendrier() {
             marginBottom: 2,
           }}
         >
+          <Typography variant="h3" gutterBottom>
+            Historique des ventes
+          </Typography>
           <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" />
         </Paper>
       </Grid>
