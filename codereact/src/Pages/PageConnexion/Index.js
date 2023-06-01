@@ -90,7 +90,7 @@ export default function PageConnexion() {
             }}
           >
             <Box component="span">
-              <Typography variant="h3" gutterBottom>
+              <Typography variant="h4" gutterBottom>
                 S'identifier
               </Typography>
               <Typography variant="body1">Nom d'utilisateur :</Typography>

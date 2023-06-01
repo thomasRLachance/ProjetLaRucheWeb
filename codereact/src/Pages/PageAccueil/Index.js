@@ -15,7 +15,7 @@ export default function PageAccueil() {
           sx={{ p: 2, width: 750, marginBottom: 3 }}
         >
           <Box component="span">
-            <Typography variant="h3" gutterBottom>
+            <Typography variant="h4" gutterBottom>
               Qui sommes-nous?
             </Typography>
             <Typography variant="body1">
@@ -30,8 +30,8 @@ export default function PageAccueil() {
       <Grid>
         <Paper textAlign="center" elevation={3} sx={{ p: 2, width: 750 }}>
           <Box component="span">
-            <Typography variant="h3" gutterBottom>
-              Nous Contacter
+            <Typography variant="h4" gutterBottom>
+              Nous contacter
             </Typography>
             <Typography variant="body1">
               550 Boulevard Wilfrid-Hamel, Local N-3, Québec, Qc, G1M 2S6

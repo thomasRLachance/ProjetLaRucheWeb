@@ -19,7 +19,7 @@ export default function ErrorPage() {
           </Typography>
           <Typography variant="body1">
             Vous n'êtes actuellement pas connecté. Veuillez vous identifier si
-            vous voulez accéder à d'autre page que les trois pages disponibles.
+            vous voulez accéder à cette page.
           </Typography>
         </Box>
       </Paper>
