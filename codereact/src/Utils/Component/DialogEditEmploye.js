@@ -6,18 +6,18 @@ import {
   Paper,
   Typography,
   Table,
-  TableBody,
-  TableCell,
   TableContainer,
-  TableHead,
-  TableRow,
   Toolbar,
   Stack,
+  TextField,
+  MenuItem,
+  Grid,
+  Divider,
 } from "@mui/material";
 
 export default function DialogEditEmploye({ rows, title, open, setIsOpen }) {
   return (
-    <Dialog open={open}>
+    <Dialog open={open} fullWidth maxWidth="sm">
       <TableContainer component={Paper}>
         <Toolbar>
           <Stack justifyContent="space-between" direction="row" spacing={2}>
@@ -27,27 +27,49 @@ export default function DialogEditEmploye({ rows, title, open, setIsOpen }) {
           </Stack>
         </Toolbar>
         <Table title={title}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Nom</TableCell>
-              <TableCell align="right">Location</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+          >
             {rows.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{
-                  "&:last-child td, &:last-child th": { border: 0 },
-                }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.location}</TableCell>
-              </TableRow>
+              <>
+                <Grid
+                  container
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  spacing={1}
+                  padding={2}
+                >
+                  <Grid item xs={6}>
+                    <TextField value={row.name} label="Nom" />
+                  </Grid>
+                  <Grid item xs={6} fullWidth>
+                    <TextField
+                      fullWidth
+                      variant="outlined"
+                      label="Location"
+                      select
+                      value={row.location}
+                    >
+                      <MenuItem>Bistro Boudreau</MenuItem>
+                      <MenuItem>Caféteria Comme Chez nous</MenuItem>
+                      <MenuItem>Administration</MenuItem>
+                    </TextField>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField value={row.username} label="Nom d'utilisateur" />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField value={row.password} label="Mot de passe" />
+                  </Grid>
+                </Grid>
+                <Divider style={{ width: "100%" }} />
+              </>
             ))}
-          </TableBody>
+          </Grid>
         </Table>
       </TableContainer>
       <DialogActions>

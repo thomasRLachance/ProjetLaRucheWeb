@@ -6,15 +6,22 @@ import DialogEditItem from "../../../../Utils/Component/DialogEditItem";
 import DialogEditEmploye from "../../../../Utils/Component/DialogEditEmploye";
 import EmployeTableMofiable from "./component/EmployeTableModifiable";
 import StoreTableMofiable from "./component/StoreTableModifiable";
+import DialogAddMenuItem from "../../../../Utils/Component/DialogAddMenuItem";
+import DialogAddEmploye from "../../../../Utils/Component/DialogAddEmploye";
+import DialogSuppression from "../../../../Utils/Component/DialogSuppression";
 
-function createEmploye(name, location) {
-  return { name, location };
+function createEmploye(name, location, username, password) {
+  return { name, location, username, password };
 }
 
-export default function AdminConnected({ store1, store2 }) {
+export default function AdminConnected({ store1, store2, user }) {
   const [isBistroOpen, setIsBistroOpen] = useState(false);
   const [isCafeOpen, setIsCafeOpen] = useState(false);
   const [isEmployeOpen, setIsEmployeOpen] = useState(false);
+  const [isAddItemOpenCafe, setIsAddItemOpenCafe] = useState(false);
+  const [isAddItemOpenBistro, setIsAddItemOpenBistro] = useState(false);
+  const [isAddEmployeOpen, setIsAddEmployeOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,10 +30,15 @@ export default function AdminConnected({ store1, store2 }) {
   };
 
   const [employe, setEmploye] = useState([
-    createEmploye("Alexandra Fortin", "Caféteria Comme Chez Nous"),
-    createEmploye("Samuelle Comtois", "Bistro Boudreau"),
-    createEmploye("Éléana Crèvecoueur", "Bistro Boudreau"),
-    createEmploye("Pascale Bouffard", "Administration"),
+    createEmploye(
+      "Alexandra Fortin",
+      "Caféteria Comme Chez Nous",
+      "AFORT",
+      "abc123"
+    ),
+    createEmploye("Samuelle Comtois", "Bistro Boudreau", "SCOMT", "abc123"),
+    createEmploye("Éléana Crèvecoueur", "Bistro Boudreau", "ECREVE", "abc123"),
+    createEmploye("Pascale Bouffard", "Administration", "PBOUF", "abc123"),
   ]);
 
   return (
@@ -39,6 +51,9 @@ export default function AdminConnected({ store1, store2 }) {
         alignItems="center"
         marginTop={0.1}
       >
+        <Typography variant="h4" gutterBottom>
+          Bonjour {user.name}
+        </Typography>
         <Grid item>
           <Paper
             elevation={3}
@@ -82,6 +97,8 @@ export default function AdminConnected({ store1, store2 }) {
                   rows={employe}
                   title="Liste des employés"
                   setIsOpen={setIsEmployeOpen}
+                  setIsAddOpen={setIsAddEmployeOpen}
+                  setIsDeleteOpen={setIsDeleteOpen}
                 />
               </Grid>
             </Grid>
@@ -112,6 +129,8 @@ export default function AdminConnected({ store1, store2 }) {
                   rows={store1}
                   title="Bistro Boudreau"
                   setIsOpen={setIsBistroOpen}
+                  setAddOpen={setIsAddItemOpenBistro}
+                  setIsDeleteOpen={setIsDeleteOpen}
                 />
               </Grid>
               <Grid item xs={5}>
@@ -119,6 +138,8 @@ export default function AdminConnected({ store1, store2 }) {
                   rows={store2}
                   title="Caféteria Comme Chez nous"
                   setIsOpen={setIsCafeOpen}
+                  setAddOpen={setIsAddItemOpenCafe}
+                  setIsDeleteOpen={setIsDeleteOpen}
                 />
               </Grid>
             </Grid>
@@ -143,6 +164,25 @@ export default function AdminConnected({ store1, store2 }) {
         open={isEmployeOpen}
         setIsOpen={setIsEmployeOpen}
       />
+      <DialogAddEmploye
+        title="Ajouter un employer"
+        open={isAddEmployeOpen}
+        setIsOpen={setIsAddEmployeOpen}
+      />
+
+      <DialogAddMenuItem
+        title="Ajouter item pour le Bistro Boudreau"
+        open={isAddItemOpenBistro}
+        setIsOpen={setIsAddItemOpenBistro}
+      />
+
+      <DialogAddMenuItem
+        title="Ajouter item pour la Caféteria Comme Chez nous"
+        open={isAddItemOpenCafe}
+        setIsOpen={setIsAddItemOpenCafe}
+      />
+
+      <DialogSuppression open={isDeleteOpen} setIsOpen={setIsDeleteOpen} />
     </>
   );
 }

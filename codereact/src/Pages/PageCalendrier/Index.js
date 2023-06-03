@@ -23,7 +23,7 @@ export default function PageCalendrier() {
   return (
     <>
       {user.location === undefined && <Navigate replace to="/Erreur" />}
-      <HeaderConnected location={user.location} name={user.name} />
+      <HeaderConnected location={user.location} />
       <Grid container justifyContent="center" alignItems="center">
         <Paper
           elevation={3}

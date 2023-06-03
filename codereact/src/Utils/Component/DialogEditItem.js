@@ -13,11 +13,12 @@ import {
   TableRow,
   Toolbar,
   Stack,
+  TextField,
 } from "@mui/material";
 
 export default function DialogEditItem({ rows, title, open, setIsOpen }) {
   return (
-    <Dialog open={open}>
+    <Dialog open={open} fullWidth maxWidth="sm">
       <TableContainer component={Paper}>
         <Toolbar>
           <Stack justifyContent="space-between" direction="row" spacing={2}>
@@ -30,7 +31,7 @@ export default function DialogEditItem({ rows, title, open, setIsOpen }) {
           <TableHead>
             <TableRow>
               <TableCell>Item</TableCell>
-              <TableCell align="right">Prix</TableCell>
+              <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -44,7 +45,9 @@ export default function DialogEditItem({ rows, title, open, setIsOpen }) {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <TableCell align="right">{row.price}</TableCell>
+                <TableCell align="right">
+                  <TextField value={row.price} label="Prix" />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -52,6 +55,7 @@ export default function DialogEditItem({ rows, title, open, setIsOpen }) {
       </TableContainer>
       <DialogActions>
         <Button onClick={() => setIsOpen(false)}>ANNULER</Button>
+        <Button onClick={() => setIsOpen(false)}>Confirmer</Button>
       </DialogActions>
     </Dialog>
   );

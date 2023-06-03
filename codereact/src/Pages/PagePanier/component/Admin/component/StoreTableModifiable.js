@@ -12,16 +12,27 @@ import {
   Stack,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import React from "react";
 
-export default function StoreTableMofiable({ rows, title, setIsOpen }) {
+export default function StoreTableMofiable({
+  rows,
+  title,
+  setIsOpen,
+  setAddOpen,
+  setIsDeleteOpen,
+}) {
   return (
     <TableContainer component={Paper}>
       <Toolbar>
         <Stack justifyContent="space-between" direction="row" spacing={2}>
-          <Typography variant="h6" component="div">
+          <Typography variant="subtitle1" component="div">
             {title}
           </Typography>
+          <IconButton color="primary" onClick={() => setAddOpen(true)}>
+            <AddIcon />
+          </IconButton>
           <IconButton color="primary" onClick={() => setIsOpen(true)}>
             <EditIcon />
           </IconButton>
@@ -45,7 +56,12 @@ export default function StoreTableMofiable({ rows, title, setIsOpen }) {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.price}</TableCell>
+              <TableCell align="right">
+                {row.price}
+                <IconButton color="error" onClick={() => setIsDeleteOpen(true)}>
+                  <DeleteForeverIcon />
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

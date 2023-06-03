@@ -47,13 +47,15 @@ export default function PagePanier() {
   const user = {
     name: sessionStorage.getItem("name"),
     location: getLocation(sessionStorage.getItem("location")),
+    username: "test",
+    password: "abc123",
   };
 
   return (
     <Grid container>
-      <HeaderConnected location={user.location} name={user.name} />
+      <HeaderConnected location={user.location} />
       {user.location === "Administration" && (
-        <AdminConnected store1={store1} store2={store2} />
+        <AdminConnected store1={store1} store2={store2} user={user} />
       )}
       {user.location === "Bistro Boudreau" && (
         <ItemTable items={store1} user={user} />
