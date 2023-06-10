@@ -22,9 +22,7 @@ export default function DialogAddMenuItem({
 
   useEffect(() => {
     if (item[passage]) {
-      console.log(item[passage]);
       if (store.filter((e) => e.name === item[passage].name).length === 0) {
-        console.log("Succes " + item[passage].name);
         setAvailableItem([
           ...availableItem,
           {
