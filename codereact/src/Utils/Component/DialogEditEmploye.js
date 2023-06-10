@@ -31,8 +31,7 @@ export default function DialogEditEmploye({ rows, title, open, setIsOpen }) {
             container
             direction="column"
             justifyContent="center"
-            alignItems="center"
-          >
+            alignItems="center">
             {rows.map((row) => (
               <>
                 <Grid
@@ -41,8 +40,7 @@ export default function DialogEditEmploye({ rows, title, open, setIsOpen }) {
                   justifyContent="center"
                   alignItems="center"
                   spacing={1}
-                  padding={2}
-                >
+                  padding={2}>
                   <Grid item xs={6}>
                     <TextField value={row.name} label="Nom" />
                   </Grid>
@@ -51,12 +49,14 @@ export default function DialogEditEmploye({ rows, title, open, setIsOpen }) {
                       fullWidth
                       variant="outlined"
                       label="Location"
-                      select
-                      value={row.location}
-                    >
-                      <MenuItem>Bistro Boudreau</MenuItem>
-                      <MenuItem>Caféteria Comme Chez nous</MenuItem>
-                      <MenuItem>Administration</MenuItem>
+                      select>
+                      <MenuItem value="Bistro Boudreau">
+                        Bistro Boudreau
+                      </MenuItem>
+                      <MenuItem value="Caféteria Comme Chez nous">
+                        Caféteria Comme Chez nous
+                      </MenuItem>
+                      <MenuItem value="Administration">Administration</MenuItem>
                     </TextField>
                   </Grid>
                   <Grid item xs={6}>

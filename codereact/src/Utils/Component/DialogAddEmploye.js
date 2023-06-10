@@ -21,9 +21,11 @@ export default function DialogAddEmploye({ title, open, setIsOpen }) {
           </Grid>
           <Grid item marginTop={1} xs={6}>
             <TextField fullWidth variant="outlined" label="Location" select>
-              <MenuItem>Bistro Boudreau</MenuItem>
-              <MenuItem>Caféteria Comme Chez nous</MenuItem>
-              <MenuItem>Administration</MenuItem>
+              <MenuItem value="Bistro Boudreau">Bistro Boudreau</MenuItem>
+              <MenuItem value="Caféteria Comme Chez nous">
+                Caféteria Comme Chez nous
+              </MenuItem>
+              <MenuItem value="Administration">Administration</MenuItem>
             </TextField>
           </Grid>
           <Grid item marginTop={1} xs={6}>

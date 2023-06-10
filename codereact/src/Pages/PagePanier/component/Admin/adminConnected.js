@@ -2,19 +2,21 @@ import { Grid, IconButton, Paper, Typography } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import DialogEditItem from "../../../../Utils/Component/DialogEditItem";
+import DialogEditMenuItem from "../../../../Utils/Component/DialogEditMenuItem";
 import DialogEditEmploye from "../../../../Utils/Component/DialogEditEmploye";
 import EmployeTableMofiable from "./component/EmployeTableModifiable";
 import StoreTableMofiable from "./component/StoreTableModifiable";
 import DialogAddMenuItem from "../../../../Utils/Component/DialogAddMenuItem";
 import DialogAddEmploye from "../../../../Utils/Component/DialogAddEmploye";
 import DialogSuppression from "../../../../Utils/Component/DialogSuppression";
+import ItemTableModifiable from "./component/ItemTableModifiable";
+import DialogAddItem from "../../../../Utils/Component/DialogAddItem";
 
 function createEmploye(name, location, username, password) {
   return { name, location, username, password };
 }
 
-export default function AdminConnected({ store1, store2, user }) {
+export default function AdminConnected({ item, store1, store2, user }) {
   const [isBistroOpen, setIsBistroOpen] = useState(false);
   const [isCafeOpen, setIsCafeOpen] = useState(false);
   const [isEmployeOpen, setIsEmployeOpen] = useState(false);
@@ -22,6 +24,7 @@ export default function AdminConnected({ store1, store2, user }) {
   const [isAddItemOpenBistro, setIsAddItemOpenBistro] = useState(false);
   const [isAddEmployeOpen, setIsAddEmployeOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isAddItemOpen, setIsAddItemOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -49,8 +52,7 @@ export default function AdminConnected({ store1, store2, user }) {
         spacing={6}
         justifyContent="center"
         alignItems="center"
-        marginTop={0.1}
-      >
+        marginTop={0.1}>
         <Typography variant="h4" gutterBottom>
           Bonjour {user.name}
         </Typography>
@@ -61,8 +63,7 @@ export default function AdminConnected({ store1, store2, user }) {
               width: 1000,
               height: 70,
               backgroundColor: "#9ab75f",
-            }}
-          >
+            }}>
             <Typography variant="h6" component="div" color="white" gutterBottom>
               Accès modifier calendrier
               <IconButton color="primary" onClick={navigateCalendar}>
@@ -79,8 +80,7 @@ export default function AdminConnected({ store1, store2, user }) {
               backgroundColor: "#9ab75f",
               padding: 1,
               marginBottom: 2,
-            }}
-          >
+            }}>
             <Typography variant="h6" component="div" color="white" gutterBottom>
               EMPLOYÉS
             </Typography>
@@ -90,8 +90,7 @@ export default function AdminConnected({ store1, store2, user }) {
               spacing={2}
               justifyContent="center"
               alignItems="center"
-              marginBottom={2}
-            >
+              marginBottom={2}>
               <Grid item xs={11}>
                 <EmployeTableMofiable
                   rows={employe}
@@ -112,8 +111,36 @@ export default function AdminConnected({ store1, store2, user }) {
               backgroundColor: "#9ab75f",
               padding: 1,
               marginBottom: 2,
-            }}
-          >
+            }}>
+            <Typography variant="h6" component="div" color="white" gutterBottom>
+              Items
+            </Typography>
+            <Grid
+              container
+              direction="row"
+              spacing={2}
+              justifyContent="center"
+              alignItems="center"
+              marginBottom={2}>
+              <Grid item xs={11}>
+                <ItemTableModifiable
+                  rows={item}
+                  title="Liste des items"
+                  setAddOpen={setIsAddItemOpen}
+                />
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+        <Grid item>
+          <Paper
+            elevation={3}
+            sx={{
+              width: 1000,
+              backgroundColor: "#9ab75f",
+              padding: 1,
+              marginBottom: 2,
+            }}>
             <Typography variant="h6" component="div" color="white" gutterBottom>
               MENU
             </Typography>
@@ -122,8 +149,7 @@ export default function AdminConnected({ store1, store2, user }) {
               direction="row"
               spacing={2}
               marginLeft={2}
-              marginBottom={2}
-            >
+              marginBottom={2}>
               <Grid item xs={6}>
                 <StoreTableMofiable
                   rows={store1}
@@ -146,13 +172,20 @@ export default function AdminConnected({ store1, store2, user }) {
           </Paper>
         </Grid>
       </Grid>
-      <DialogEditItem
+      <DialogAddItem
+        rows={item}
+        title={"Ajouter un item"}
+        open={isAddItemOpen}
+        setIsOpen={setIsAddItemOpen}
+      />
+
+      <DialogEditMenuItem
         rows={store1}
         title="Bistro Boudreau"
         open={isBistroOpen}
         setIsOpen={setIsBistroOpen}
       />
-      <DialogEditItem
+      <DialogEditMenuItem
         rows={store2}
         title="Caféteria Comme Chez nous"
         open={isCafeOpen}
@@ -174,12 +207,16 @@ export default function AdminConnected({ store1, store2, user }) {
         title="Ajouter item pour le Bistro Boudreau"
         open={isAddItemOpenBistro}
         setIsOpen={setIsAddItemOpenBistro}
+        item={item}
+        store={store1}
       />
 
       <DialogAddMenuItem
         title="Ajouter item pour la Caféteria Comme Chez nous"
         open={isAddItemOpenCafe}
         setIsOpen={setIsAddItemOpenCafe}
+        item={item}
+        store={store2}
       />
 
       <DialogSuppression open={isDeleteOpen} setIsOpen={setIsDeleteOpen} />
