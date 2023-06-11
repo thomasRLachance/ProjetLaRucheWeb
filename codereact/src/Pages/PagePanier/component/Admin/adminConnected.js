@@ -1,6 +1,6 @@
 import { Grid, IconButton, Paper, Typography } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import DialogEditMenuItem from "../../../../Utils/Component/DialogEditMenuItem";
 import DialogEditEmploye from "../../../../Utils/Component/DialogEditEmploye";
@@ -42,6 +42,48 @@ export default function AdminConnected({ item, store1, store2, user }) {
     createEmploye("Samuelle Comtois", "Bistro Boudreau", "SCOMT", "abc123"),
     createEmploye("Éléana Crèvecoueur", "Bistro Boudreau", "ECREVE", "abc123"),
     createEmploye("Pascale Bouffard", "Administration", "PBOUF", "abc123"),
+  ]);
+
+  const [availableItemBistro, setavailableItemBistro] = useState([]);
+  const [passage1, setPassage1] = useState(0);
+
+  const [availableItemCafe, setavailableItemCafe] = useState([]);
+  const [passage2, setPassage2] = useState(0);
+
+  useEffect(() => {
+    if (item[passage1]) {
+      if (store1.filter((e) => e.name === item[passage1].name).length === 0) {
+        setavailableItemBistro([
+          ...availableItemBistro,
+          {
+            id: availableItemBistro.length,
+            name: item[passage1].name,
+          },
+        ]);
+      }
+      setPassage1(passage1 + 1);
+    }
+
+    if (item[passage2]) {
+      if (store2.filter((e) => e.name === item[passage2].name).length === 0) {
+        setavailableItemCafe([
+          ...availableItemCafe,
+          {
+            id: availableItemCafe.length,
+            name: item[passage2].name,
+          },
+        ]);
+      }
+      setPassage2(passage2 + 1);
+    }
+  }, [
+    item,
+    store2,
+    passage2,
+    availableItemCafe,
+    availableItemBistro,
+    passage1,
+    store1,
   ]);
 
   return (
@@ -157,6 +199,7 @@ export default function AdminConnected({ item, store1, store2, user }) {
                   setIsOpen={setIsBistroOpen}
                   setAddOpen={setIsAddItemOpenBistro}
                   setIsDeleteOpen={setIsDeleteOpen}
+                  isAddPossible={availableItemBistro.length > 0}
                 />
               </Grid>
               <Grid item xs={5}>
@@ -166,6 +209,7 @@ export default function AdminConnected({ item, store1, store2, user }) {
                   setIsOpen={setIsCafeOpen}
                   setAddOpen={setIsAddItemOpenCafe}
                   setIsDeleteOpen={setIsDeleteOpen}
+                  isAddPossible={availableItemCafe.length > 0}
                 />
               </Grid>
             </Grid>

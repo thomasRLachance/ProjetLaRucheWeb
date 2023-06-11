@@ -22,6 +22,7 @@ export default function StoreTableMofiable({
   setIsOpen,
   setAddOpen,
   setIsDeleteOpen,
+  isAddPossible,
 }) {
   return (
     <TableContainer component={Paper}>
@@ -30,7 +31,10 @@ export default function StoreTableMofiable({
           <Typography variant="subtitle1" component="div">
             {title}
           </Typography>
-          <IconButton color="primary" onClick={() => setAddOpen(true)}>
+          <IconButton
+            color="primary"
+            onClick={() => setAddOpen(true)}
+            disabled={!isAddPossible}>
             <AddIcon />
           </IconButton>
           <IconButton color="primary" onClick={() => setIsOpen(true)}>
@@ -51,8 +55,7 @@ export default function StoreTableMofiable({
               key={row.name}
               sx={{
                 "&:last-child td, &:last-child th": { border: 0 },
-              }}
-            >
+              }}>
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>

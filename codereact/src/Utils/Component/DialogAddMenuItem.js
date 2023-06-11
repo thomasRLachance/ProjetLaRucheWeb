@@ -33,7 +33,7 @@ export default function DialogAddMenuItem({
       }
       setPassage(passage + 1);
     }
-  }, [item, store, passage]);
+  }, [item, store, passage, availableItem]);
 
   return (
     <Dialog open={open}>
