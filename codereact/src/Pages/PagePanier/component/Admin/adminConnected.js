@@ -251,16 +251,14 @@ export default function AdminConnected({ item, store1, store2, user }) {
         title="Ajouter item pour le Bistro Boudreau"
         open={isAddItemOpenBistro}
         setIsOpen={setIsAddItemOpenBistro}
-        item={item}
-        store={store1}
+        availableItem={availableItemBistro}
       />
 
       <DialogAddMenuItem
         title="Ajouter item pour la Caféteria Comme Chez nous"
         open={isAddItemOpenCafe}
         setIsOpen={setIsAddItemOpenCafe}
-        item={item}
-        store={store2}
+        availableItem={availableItemCafe}
       />
 
       <DialogSuppression open={isDeleteOpen} setIsOpen={setIsDeleteOpen} />

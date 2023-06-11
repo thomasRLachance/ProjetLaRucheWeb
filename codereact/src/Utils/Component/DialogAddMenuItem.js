@@ -14,27 +14,8 @@ export default function DialogAddMenuItem({
   title,
   open,
   setIsOpen,
-  item,
-  store,
+  availableItem,
 }) {
-  const [availableItem, setAvailableItem] = useState([]);
-  const [passage, setPassage] = useState(0);
-
-  useEffect(() => {
-    if (item[passage]) {
-      if (store.filter((e) => e.name === item[passage].name).length === 0) {
-        setAvailableItem([
-          ...availableItem,
-          {
-            id: availableItem.length,
-            name: item[passage].name,
-          },
-        ]);
-      }
-      setPassage(passage + 1);
-    }
-  }, [item, store, passage, availableItem]);
-
   return (
     <Dialog open={open}>
       <DialogTitle>{title}</DialogTitle>
