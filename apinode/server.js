@@ -468,12 +468,12 @@ app.get("/locations/:locationId/productLocations", async (req, res) => {
 });
 
 // PUT Endpoint to update a product location and deactivate it
-// Body parameters: isActive
+// Body parameters: price, isActive
 // eg: /productLocations/1 with isActive set to false will turn off the productLocation 1
 app.put("/productLocations/:productLocationId", async (req, res) => {
   try {
     const { productLocationId } = req.params; // Extract the productLocationId from the request parameters
-    const { isActive } = req.body; // Extract the isActive parameter from the request body
+    const { price, isActive } = req.body; // Extract the isActive parameter from the request body
 
     const productLocation = await ProductLocation.findByPk(productLocationId); // Find the product location by its id
 
@@ -486,6 +486,50 @@ app.put("/productLocations/:productLocationId", async (req, res) => {
     await productLocation.save(); // Save the changes
 
     res.json(productLocation);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// PUT Endpoint to update sales of different products
+// Body parameters: productLocationId, amount
+app.put("/sales", async (req, res) => {
+  try {
+    const { productLocationId, amount } = req.body;
+
+    // Check if there is an existing entry for the same productLocationId and current day
+    const currentDate = new Date().toISOString().split("T")[0];
+    const existingProductSale = await ProductSale.findOne({
+      where: {
+        productLocationId,
+        date: currentDate,
+      },
+    });
+
+    if (existingProductSale) {
+      // If an existing entry is found, update the amount and total
+      existingProductSale.amount += amount;
+      existingProductSale.total =
+        existingProductSale.amount * existingProductSale.ProductLocation.price;
+      await existingProductSale.save(); // Save the updated entry
+    } else {
+      // If no existing entry is found, create a new product sale entry for the day
+      const productLocation = await ProductLocation.findByPk(productLocationId);
+      if (!productLocation) {
+        return res.status(404).json({ error: "Product Location not found" });
+      }
+
+      const total = amount * productLocation.price;
+      await ProductSale.create({
+        productLocationId,
+        amount,
+        total,
+        date: currentDate,
+      });
+    }
+
+    res.json({ message: "Sales saved successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });

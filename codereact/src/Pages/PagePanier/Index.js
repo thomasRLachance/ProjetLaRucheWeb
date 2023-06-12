@@ -77,11 +77,7 @@ export default function PagePanier() {
   useEffect(() => {
     //Get user
     axios
-      .get("http://localhost:3000/user", {
-        params: {
-          username: sessionStorage.getItem("username"),
-        },
-      })
+      .get(`http://localhost:3000/users/${sessionStorage.getItem("username")}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -126,7 +122,7 @@ export default function PagePanier() {
   return (
     <Grid container>
       <HeaderConnected location={user.location} />
-      {user.location === "Administration" && (
+      {user.privileges === 3 && (
         <AdminConnected
           store1={store1}
           store2={store2}
@@ -134,12 +130,8 @@ export default function PagePanier() {
           item={item}
         />
       )}
-      {user.locationId === "Bistro Boudreau" && (
-        <ItemTable items={store1} user={user} />
-      )}
-      {user.locationId === "Caféteria Comme Chez nous" && (
-        <ItemTable items={store2} user={user} />
-      )}
+      {user.privileges === 1 && <ItemTable items={store1} user={user} />}
+      {user.privileges === 2 && <ItemTable items={store2} user={user} />}
       {user.locationId === undefined && <Navigate replace to="/Erreur" />}
     </Grid>
   );
