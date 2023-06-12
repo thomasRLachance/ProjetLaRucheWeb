@@ -91,6 +91,7 @@ const ProductLocation = sequelize.define(
     isActive: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
+      defaultValue: true,
     },
   },
   {

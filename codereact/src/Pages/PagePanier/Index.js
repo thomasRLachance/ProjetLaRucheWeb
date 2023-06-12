@@ -65,16 +65,23 @@ export default function PagePanier() {
   ]);
 
   const [user, setUser] = useState({
-    name: sessionStorage.getItem("name"),
-    location: getLocation("3"),
-    username: "test",
-    password: "abc123",
+    userId: 1,
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    privileges: "",
+    locationId: "",
   });
 
   useEffect(() => {
     //Get user
     axios
-      .get("https://TODO.com/getUser")
+      .get("http://localhost:3000/user", {
+        params: {
+          username: sessionStorage.getItem("username"),
+        },
+      })
       .then((response) => {
         setUser(response.data);
       })
@@ -127,13 +134,13 @@ export default function PagePanier() {
           item={item}
         />
       )}
-      {user.location === "Bistro Boudreau" && (
+      {user.locationId === "Bistro Boudreau" && (
         <ItemTable items={store1} user={user} />
       )}
-      {user.location === "Caféteria Comme Chez nous" && (
+      {user.locationId === "Caféteria Comme Chez nous" && (
         <ItemTable items={store2} user={user} />
       )}
-      {user.location === undefined && <Navigate replace to="/Erreur" />}
+      {user.locationId === undefined && <Navigate replace to="/Erreur" />}
     </Grid>
   );
 }
