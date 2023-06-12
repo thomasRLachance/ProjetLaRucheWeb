@@ -10,9 +10,6 @@ function createData(name, price) {
   return { name, price };
 }
 
-function createItem(name) {
-  return { name };
-}
 export default function PagePanier() {
   const getLocation = (locationId) => {
     if (locationId === "1") {
@@ -25,48 +22,51 @@ export default function PagePanier() {
   };
 
   const [item, setItem] = useState([
-    createItem("Repas Chaud"),
-    createItem("Jus de fruits"),
-    createItem("Smoothie"),
-    createItem("Gatorade"),
-    createItem("Collation"),
-    createItem("Fruit"),
-    createItem("Lait au chocolat"),
-    createItem("Jus de légumes"),
-    createItem("Yop"),
-    createItem("Thé glacé"),
-    createItem("Soupe"),
+    {
+      productId: 1,
+      name: "placeholder",
+      createdAt: "placeholder",
+      updatedAt: "placeholder",
+    },
   ]);
 
   const [store1, setStore1] = useState([
-    createData("Repas Chaud", 2.0),
-    createData("Jus de fruits", 0.5),
-    createData("Smoothie", 0),
-    createData("Gatorade", 1.0),
-    createData("Collation", 1.0),
-    createData("Fruit", 0.5),
-    createData("Lait au chocolat", 1.0),
-    createData("Jus de légumes", 0.5),
-    createData("Yop", 1.0),
-    createData("Thé glacé", 1.0),
-    createData("Soupe", 0),
+    {
+      productLocationId: 1,
+      productId: 1,
+      locationId: 1,
+      isActive: true,
+      createdAt: "placeholder",
+      updatedAt: "placeholder",
+      product: {
+        productId: 1,
+        name: "placeholder",
+        createdAt: "placeholder",
+        updatedAt: "placeholder",
+      },
+    },
   ]);
 
   const [store2, setStore2] = useState([
-    createData("Repas Chaud", 3.0),
-    createData("Sub'Vanier", 2.0),
-    createData("Jus de fruits", 1.0),
-    createData("Smoothie", 1.0),
-    createData("Collation", 1.0),
-    createData("Fruit", 0.5),
-    createData("Lait au chocolat", 0.5),
-    createData("Jus de légumes", 0.5),
-    createData("Salade", 1.0),
+    {
+      productLocationId: 1,
+      productId: 1,
+      locationId: 2,
+      isActive: true,
+      createdAt: "placeholder",
+      updatedAt: "placeholder",
+      product: {
+        productId: 1,
+        name: "placeholder",
+        createdAt: "placeholder",
+        updatedAt: "placeholder",
+      },
+    },
   ]);
 
   const [user, setUser] = useState({
     name: sessionStorage.getItem("name"),
-    location: getLocation(sessionStorage.getItem("location")),
+    location: getLocation("3"),
     username: "test",
     password: "abc123",
   });
@@ -85,7 +85,7 @@ export default function PagePanier() {
     //Get item
 
     axios
-      .get("https://TODO.com/getItem")
+      .get("http://localhost:3000/products")
       .then((response) => {
         setItem(response.data);
       })
@@ -96,7 +96,7 @@ export default function PagePanier() {
     //Get menu bistro
 
     axios
-      .get("https://TODO.com/getBistro")
+      .get("http://localhost:3000/locations/1/productLocations")
       .then((response) => {
         setStore1(response.data);
       })
@@ -107,14 +107,14 @@ export default function PagePanier() {
     //Get menu cafe
 
     axios
-      .get("https://TODO.com/getCafe")
+      .get("http://localhost:3000/locations/2/productLocations")
       .then((response) => {
         setStore2(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, []);
 
   return (
     <Grid container>

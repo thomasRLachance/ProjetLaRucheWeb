@@ -34,7 +34,8 @@ export default function StoreTableMofiable({
           <IconButton
             color="primary"
             onClick={() => setAddOpen(true)}
-            disabled={!isAddPossible}>
+            disabled={!isAddPossible}
+          >
             <AddIcon />
           </IconButton>
           <IconButton color="primary" onClick={() => setIsOpen(true)}>
@@ -52,12 +53,13 @@ export default function StoreTableMofiable({
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.productLocationId}
               sx={{
                 "&:last-child td, &:last-child th": { border: 0 },
-              }}>
+              }}
+            >
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.product.name}
               </TableCell>
               <TableCell align="right">
                 {row.price}

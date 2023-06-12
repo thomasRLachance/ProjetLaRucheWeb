@@ -7,6 +7,7 @@ import {
   Stack,
   Button,
 } from "@mui/material";
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import Header from "../../Utils/Component/header";
@@ -55,18 +56,25 @@ export default function PageConnexion() {
     setPassword(event.target.value);
   };
 
+  const handleLogin = () => {
+    axios
+      .post("http://localhost:3000/login", {
+        username: username,
+        password: password,
+      })
+      .then((response) => {
+        sessionStorage.setItem("token", response.token);
+        sessionStorage.setItem("username", username);
+        navigateConnect();
+      })
+      .catch((err) => {
+        setIsFailed(true);
+      });
+  };
+
   const handleSubmit = () => {
-    var user = allUsers.find(
-      (x) => x.username === username && x.password === password
-    );
-    if (user) {
-      setIsFailed(false);
-      sessionStorage.setItem("name", user.name);
-      sessionStorage.setItem("location", user.location);
-      navigateConnect();
-    } else {
-      setIsFailed(true);
-    }
+    setIsFailed(false);
+    handleLogin();
   };
 
   return (

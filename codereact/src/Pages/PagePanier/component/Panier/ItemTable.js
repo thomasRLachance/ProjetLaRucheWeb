@@ -115,14 +115,17 @@ export default function ItemTable({ items, user }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {items.map((item) => (
-                  <ItemTableRow
-                    item={item}
-                    key={item.name}
-                    total={total}
-                    setTotal={setTotal}
-                  />
-                ))}
+                {items.map((item) => {
+                  console.log("ITEM" + item);
+                  return (
+                    <ItemTableRow
+                      item={item}
+                      key={item.productLocationId}
+                      total={total}
+                      setTotal={setTotal}
+                    />
+                  );
+                })}
                 <TableRow>
                   <TableCell align="right"></TableCell>
                   <TableCell align="right"></TableCell>

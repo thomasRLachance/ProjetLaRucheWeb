@@ -54,10 +54,10 @@ export default function EmployeTableMofiable({
               }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.firstName} {row.lastName}
               </TableCell>
               <TableCell align="right">
-                {row.location}
+                {row.privileges}
                 <IconButton color="error" onClick={() => setIsDeleteOpen(true)}>
                   <DeleteForeverIcon />
                 </IconButton>

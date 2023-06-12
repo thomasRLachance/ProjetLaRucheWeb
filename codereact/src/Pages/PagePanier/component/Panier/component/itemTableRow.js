@@ -9,7 +9,6 @@ export default function ItemTableRow({ item, total, setTotal }) {
   const setPrice = (price) => {
     return price * quantite;
   };
-
   return (
     <TableRow
       sx={{
@@ -17,7 +16,7 @@ export default function ItemTableRow({ item, total, setTotal }) {
       }}
     >
       <TableCell component="th" scope="row">
-        {item.name} ({item.price}$)
+        {item.product.name} ({item.price}$)
       </TableCell>
       <TableCell align="right">
         <IconButton

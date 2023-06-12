@@ -11,10 +11,7 @@ import DialogAddEmploye from "../../../../Utils/Component/DialogAddEmploye";
 import DialogSuppression from "../../../../Utils/Component/DialogSuppression";
 import ItemTableModifiable from "./component/ItemTableModifiable";
 import DialogAddItem from "../../../../Utils/Component/DialogAddItem";
-
-function createEmploye(name, location, username, password) {
-  return { name, location, username, password };
-}
+import axios from "axios";
 
 export default function AdminConnected({ item, store1, store2, user }) {
   const [isBistroOpen, setIsBistroOpen] = useState(false);
@@ -33,15 +30,17 @@ export default function AdminConnected({ item, store1, store2, user }) {
   };
 
   const [employe, setEmploye] = useState([
-    createEmploye(
-      "Alexandra Fortin",
-      "Caféteria Comme Chez Nous",
-      "AFORT",
-      "abc123"
-    ),
-    createEmploye("Samuelle Comtois", "Bistro Boudreau", "SCOMT", "abc123"),
-    createEmploye("Éléana Crèvecoueur", "Bistro Boudreau", "ECREVE", "abc123"),
-    createEmploye("Pascale Bouffard", "Administration", "PBOUF", "abc123"),
+    {
+      userId: 1,
+      username: "placeholder",
+      password: "placeholder",
+      firstName: "placeholder",
+      lastName: "placeholder",
+      privileges: "placeholder",
+      locationId: "placeholder",
+      createdAt: "placeholder",
+      updatedAt: "placeholder",
+    },
   ]);
 
   const [availableItemBistro, setavailableItemBistro] = useState([]);
@@ -51,6 +50,18 @@ export default function AdminConnected({ item, store1, store2, user }) {
   const [passage2, setPassage2] = useState(0);
 
   useEffect(() => {
+    //Get user
+    if (passage1 === 0) {
+      axios
+        .get("http://localhost:3000/users")
+        .then((response) => {
+          setEmploye(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
     if (item[passage1]) {
       if (store1.filter((e) => e.name === item[passage1].name).length === 0) {
         setavailableItemBistro([
@@ -94,7 +105,8 @@ export default function AdminConnected({ item, store1, store2, user }) {
         spacing={6}
         justifyContent="center"
         alignItems="center"
-        marginTop={0.1}>
+        marginTop={0.1}
+      >
         <Typography variant="h4" gutterBottom>
           Bonjour {user.name}
         </Typography>
@@ -105,7 +117,8 @@ export default function AdminConnected({ item, store1, store2, user }) {
               width: 1000,
               height: 70,
               backgroundColor: "#9ab75f",
-            }}>
+            }}
+          >
             <Typography variant="h6" component="div" color="white" gutterBottom>
               Accès modifier calendrier
               <IconButton color="primary" onClick={navigateCalendar}>
@@ -122,7 +135,8 @@ export default function AdminConnected({ item, store1, store2, user }) {
               backgroundColor: "#9ab75f",
               padding: 1,
               marginBottom: 2,
-            }}>
+            }}
+          >
             <Typography variant="h6" component="div" color="white" gutterBottom>
               EMPLOYÉS
             </Typography>
@@ -132,7 +146,8 @@ export default function AdminConnected({ item, store1, store2, user }) {
               spacing={2}
               justifyContent="center"
               alignItems="center"
-              marginBottom={2}>
+              marginBottom={2}
+            >
               <Grid item xs={11}>
                 <EmployeTableMofiable
                   rows={employe}
@@ -153,7 +168,8 @@ export default function AdminConnected({ item, store1, store2, user }) {
               backgroundColor: "#9ab75f",
               padding: 1,
               marginBottom: 2,
-            }}>
+            }}
+          >
             <Typography variant="h6" component="div" color="white" gutterBottom>
               Items
             </Typography>
@@ -163,7 +179,8 @@ export default function AdminConnected({ item, store1, store2, user }) {
               spacing={2}
               justifyContent="center"
               alignItems="center"
-              marginBottom={2}>
+              marginBottom={2}
+            >
               <Grid item xs={11}>
                 <ItemTableModifiable
                   rows={item}
@@ -182,7 +199,8 @@ export default function AdminConnected({ item, store1, store2, user }) {
               backgroundColor: "#9ab75f",
               padding: 1,
               marginBottom: 2,
-            }}>
+            }}
+          >
             <Typography variant="h6" component="div" color="white" gutterBottom>
               MENU
             </Typography>
@@ -191,7 +209,8 @@ export default function AdminConnected({ item, store1, store2, user }) {
               direction="row"
               spacing={2}
               marginLeft={2}
-              marginBottom={2}>
+              marginBottom={2}
+            >
               <Grid item xs={6}>
                 <StoreTableMofiable
                   rows={store1}
