@@ -13,7 +13,7 @@ import logo from "../../logo.png";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import { useNavigate } from "react-router";
 
-export default function HeaderConnected({ location }) {
+export default function HeaderConnected({ user }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -27,8 +27,8 @@ export default function HeaderConnected({ location }) {
   };
 
   const handleDisconnectClicked = () => {
-    sessionStorage.setItem("name", undefined);
-    sessionStorage.setItem("location", undefined);
+    sessionStorage.setItem("username", undefined);
+    sessionStorage.setItem("token", undefined);
     navigate("/");
   };
 
@@ -38,6 +38,16 @@ export default function HeaderConnected({ location }) {
 
   const navigateProfil = () => {
     navigate("/Profil");
+  };
+
+  const getLocation = (locationId) => {
+    if (locationId === 2) {
+      return "Bistro Boudreau";
+    } else if (locationId === 3) {
+      return "Caféteria Comme Chez nous";
+    } else if (locationId === 1) {
+      return "Administration";
+    }
   };
   return (
     <Box
@@ -62,7 +72,7 @@ export default function HeaderConnected({ location }) {
           />
         </Button>
         <Typography variant="h4" color="white">
-          {location}
+          {getLocation(user.locationId)}
         </Typography>
         <Typography variant="body1" color="white">
           <IconButton

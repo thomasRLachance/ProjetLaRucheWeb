@@ -9,6 +9,15 @@ import {
 import React from "react";
 
 export default function InformationTable({ user, title }) {
+  const getLocation = (locationId) => {
+    if (locationId === 2) {
+      return "Bistro Boudreau";
+    } else if (locationId === 3) {
+      return "Caféteria Comme Chez nous";
+    } else if (locationId === 1) {
+      return "Administration";
+    }
+  };
   return (
     <TableContainer component={Paper}>
       <Table title={title}>
@@ -21,7 +30,9 @@ export default function InformationTable({ user, title }) {
             <TableCell component="th" scope="row">
               Nom :
             </TableCell>
-            <TableCell align="right">{user.name}</TableCell>
+            <TableCell align="right">
+              {user.firstName} {user.lastName}
+            </TableCell>
           </TableRow>
           <TableRow
             sx={{
@@ -31,7 +42,7 @@ export default function InformationTable({ user, title }) {
             <TableCell component="th" scope="row">
               Location :
             </TableCell>
-            <TableCell align="right">{user.location}</TableCell>
+            <TableCell align="right">{getLocation(user.locationId)}</TableCell>
           </TableRow>
           <TableRow
             sx={{

@@ -108,7 +108,7 @@ export default function AdminConnected({ item, store1, store2, user }) {
         marginTop={0.1}
       >
         <Typography variant="h4" gutterBottom>
-          Bonjour {user.name}
+          Bonjour {user.firstName}!
         </Typography>
         <Grid item>
           <Paper

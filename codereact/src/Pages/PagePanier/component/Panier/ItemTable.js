@@ -99,7 +99,7 @@ export default function ItemTable({ items, user }) {
         >
           <TableContainer>
             <Typography variant="h4" gutterBottom>
-              Bonjour {user.name}
+              Bonjour {user.firstName}!
             </Typography>
             <Typography variant="body" gutterBottom>
               Dernière sauveguarde : {today}

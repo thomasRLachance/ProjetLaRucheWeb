@@ -6,21 +6,7 @@ import AdminConnected from "./component/Admin/adminConnected";
 import ItemTable from "./component/Panier/ItemTable";
 import axios from "axios";
 
-function createData(name, price) {
-  return { name, price };
-}
-
 export default function PagePanier() {
-  const getLocation = (locationId) => {
-    if (locationId === "1") {
-      return "Bistro Boudreau";
-    } else if (locationId === "2") {
-      return "Caféteria Comme Chez nous";
-    } else if (locationId === "3") {
-      return "Administration";
-    }
-  };
-
   const [item, setItem] = useState([
     {
       productId: 1,
@@ -121,8 +107,8 @@ export default function PagePanier() {
 
   return (
     <Grid container>
-      <HeaderConnected location={user.location} />
-      {user.privileges === 3 && (
+      <HeaderConnected user={user} />
+      {user.locationId === 1 && (
         <AdminConnected
           store1={store1}
           store2={store2}
@@ -130,9 +116,9 @@ export default function PagePanier() {
           item={item}
         />
       )}
-      {user.privileges === 1 && <ItemTable items={store1} user={user} />}
-      {user.privileges === 2 && <ItemTable items={store2} user={user} />}
-      {user.locationId === undefined && <Navigate replace to="/Erreur" />}
+      {user.locationId === 2 && <ItemTable items={store1} user={user} />}
+      {user.locationId === 3 && <ItemTable items={store2} user={user} />}
+      {user.locationId === null && <Navigate replace to="/Erreur" />}
     </Grid>
   );
 }

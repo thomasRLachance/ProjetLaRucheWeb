@@ -16,26 +16,7 @@ import NavigationBar from "../../Utils/Component/navigationBar";
 export default function PageConnexion() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [allUsers, setAllUsers] = useState([
-    {
-      username: "test1",
-      password: "abc123",
-      name: "Thomas Lachance1",
-      location: "1",
-    },
-    {
-      username: "test2",
-      password: "abc123",
-      name: "Thomas Lachance2",
-      location: "2",
-    },
-    {
-      username: "test3",
-      password: "abc123",
-      name: "Thomas Lachance3",
-      location: "3",
-    },
-  ]);
+
   const [isFailed, setIsFailed] = useState(false);
 
   const navigate = useNavigate();
