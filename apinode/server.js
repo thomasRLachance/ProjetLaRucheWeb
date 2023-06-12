@@ -13,7 +13,6 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
-
 app.use(express.json());
 
 // Create a Sequelize instance and connect to the database
@@ -199,12 +198,19 @@ sequelize
 // Body parameters: username, password, firstName, lastName, privilege
 app.post("/users", async (req, res) => {
   try {
-    const { username, password, firstName, lastName, privileges } = req.body; // Extract user details from the request body
+    const { username, password, firstName, lastName, privileges, locationId } =
+      req.body; // Extract user details from the request body
 
     // Check if the username is already taken
     const existingUser = await User.findOne({ where: { username } });
     if (existingUser) {
       return res.status(409).json({ message: "Username already exists" });
+    }
+
+    // Check if the location exists
+    const location = await Location.findByPk(locationId);
+    if (!location) {
+      return res.status(404).json({ error: "Location not found" });
     }
 
     // Hash the password
@@ -216,6 +222,7 @@ app.post("/users", async (req, res) => {
       firstName,
       lastName,
       privileges,
+      locationId,
     }); // Create a new user record
 
     res.json(user);
