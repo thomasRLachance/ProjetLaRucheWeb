@@ -37,7 +37,7 @@ export default function ItemTableModifiable({ rows, title, setAddOpen }) {
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.productId}
               sx={{
                 "&:last-child td, &:last-child th": { border: 0 },
               }}>

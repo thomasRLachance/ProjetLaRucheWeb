@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Dialog,
@@ -14,9 +14,59 @@ import {
   Toolbar,
   Stack,
   TextField,
+  Switch,
 } from "@mui/material";
+import axios from "axios";
 
-export default function DialogEditMenuItem({ rows, title, open, setIsOpen }) {
+export default function DialogEditMenuItem({
+  item,
+  title,
+  open,
+  setIsOpen,
+  setCurrentPassage,
+  currentPassage,
+}) {
+  const [price, setPrice] = useState("");
+  const [isActive, setIsActive] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setPrice(item.price);
+    setIsActive(item.isActive);
+    setError(false);
+  }, [open, item.isActive, item.price]);
+
+  const handleChangePrice = (event) => {
+    setPrice(event.target.value);
+  };
+
+  const handleActiveChange = (event) => {
+    setIsActive(!isActive);
+  };
+
+  const handleSubmit = () => {
+    setError(false);
+    if (price !== "") {
+      axios
+        .put(
+          `http://localhost:3000/productLocations/${item.productLocationId}`,
+          {
+            price: price,
+            isActive: isActive,
+          }
+        )
+        .then((response) => {
+          setCurrentPassage(currentPassage + 1);
+          setIsOpen(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setError(true);
+        });
+    } else {
+      setError(true);
+    }
+  };
   return (
     <Dialog open={open} fullWidth maxWidth="sm">
       <TableContainer component={Paper}>
@@ -32,29 +82,44 @@ export default function DialogEditMenuItem({ rows, title, open, setIsOpen }) {
             <TableRow>
               <TableCell>Item</TableCell>
               <TableCell align="right"></TableCell>
+              <TableCell align="right">Actif</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{
-                  "&:last-child td, &:last-child th": { border: 0 },
-                }}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">
-                  <TextField value={row.price} label="Prix" />
-                </TableCell>
-              </TableRow>
-            ))}
+            <TableRow
+              key={item.productId}
+              sx={{
+                "&:last-child td, &:last-child th": { border: 0 },
+              }}>
+              <TableCell component="th" scope="row">
+                {item.product.name}
+              </TableCell>
+              <TableCell align="right">
+                <TextField
+                  defaultValue={item.price}
+                  label="Prix"
+                  onChange={handleChangePrice}
+                />
+              </TableCell>
+              <TableCell align="right">
+                <Switch
+                  defaultChecked={item.isActive}
+                  onChange={handleActiveChange}
+                />
+              </TableCell>
+            </TableRow>
           </TableBody>
         </Table>
+        {error && (
+          <Typography variant="body1" color="red">
+            Veuillez entrer un prix
+          </Typography>
+        )}
+        {!error && <br />}
       </TableContainer>
       <DialogActions>
         <Button onClick={() => setIsOpen(false)}>ANNULER</Button>
-        <Button onClick={() => setIsOpen(false)}>Confirmer</Button>
+        <Button onClick={handleSubmit}>Confirmer</Button>
       </DialogActions>
     </Dialog>
   );

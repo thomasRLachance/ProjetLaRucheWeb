@@ -489,6 +489,7 @@ app.put("/productLocations/:productLocationId", async (req, res) => {
     }
 
     productLocation.isActive = isActive; // Update the isActive property
+    productLocation.price = price;
 
     await productLocation.save(); // Save the changes
 

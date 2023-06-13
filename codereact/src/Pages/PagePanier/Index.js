@@ -114,6 +114,10 @@ export default function PagePanier() {
           store2={store2}
           user={user}
           item={item}
+          setUser={setUser}
+          setItem={setItem}
+          setStore1={setStore1}
+          setStore2={setStore2}
         />
       )}
       {user.locationId === 2 && <ItemTable items={store1} user={user} />}

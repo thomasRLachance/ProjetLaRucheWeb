@@ -22,7 +22,17 @@ export default function EmployeTableMofiable({
   setIsOpen,
   setIsAddOpen,
   setIsDeleteOpen,
+  setEmployeToModify,
 }) {
+  const getLocation = (locationId) => {
+    if (locationId === 2) {
+      return "Bistro Boudreau";
+    } else if (locationId === 3) {
+      return "Caféteria Comme Chez nous";
+    } else if (locationId === 1) {
+      return "Administration";
+    }
+  };
   return (
     <TableContainer component={Paper}>
       <Toolbar>
@@ -32,9 +42,6 @@ export default function EmployeTableMofiable({
           </Typography>
           <IconButton color="primary" onClick={() => setIsAddOpen(true)}>
             <AddIcon />
-          </IconButton>
-          <IconButton color="primary" onClick={() => setIsOpen(true)}>
-            <EditIcon />
           </IconButton>
         </Stack>
       </Toolbar>
@@ -48,16 +55,23 @@ export default function EmployeTableMofiable({
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.location}
+              key={row.userId}
               sx={{
                 "&:last-child td, &:last-child th": { border: 0 },
-              }}
-            >
+              }}>
               <TableCell component="th" scope="row">
                 {row.firstName} {row.lastName}
               </TableCell>
               <TableCell align="right">
-                {row.privileges}
+                {getLocation(row.locationId)}
+                <IconButton
+                  color="primary"
+                  onClick={() => {
+                    setEmployeToModify(row);
+                    setIsOpen(true);
+                  }}>
+                  <EditIcon />
+                </IconButton>
                 <IconButton color="error" onClick={() => setIsDeleteOpen(true)}>
                   <DeleteForeverIcon />
                 </IconButton>

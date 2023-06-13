@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import React from "react";
 
 export default function StoreTableMofiable({
@@ -21,8 +20,8 @@ export default function StoreTableMofiable({
   title,
   setIsOpen,
   setAddOpen,
-  setIsDeleteOpen,
   isAddPossible,
+  setItemLocationToModify,
 }) {
   return (
     <TableContainer component={Paper}>
@@ -34,12 +33,8 @@ export default function StoreTableMofiable({
           <IconButton
             color="primary"
             onClick={() => setAddOpen(true)}
-            disabled={!isAddPossible}
-          >
+            disabled={!isAddPossible}>
             <AddIcon />
-          </IconButton>
-          <IconButton color="primary" onClick={() => setIsOpen(true)}>
-            <EditIcon />
           </IconButton>
         </Stack>
       </Toolbar>
@@ -56,15 +51,22 @@ export default function StoreTableMofiable({
               key={row.productLocationId}
               sx={{
                 "&:last-child td, &:last-child th": { border: 0 },
-              }}
-            >
+              }}>
               <TableCell component="th" scope="row">
-                {row.product.name}
+                {row.product.name}{" "}
+                <Typography color="red">
+                  {row.isActive ? "" : "Inactif"}
+                </Typography>
               </TableCell>
               <TableCell align="right">
                 {row.price}
-                <IconButton color="error" onClick={() => setIsDeleteOpen(true)}>
-                  <DeleteForeverIcon />
+                <IconButton
+                  color="primary"
+                  onClick={() => {
+                    setItemLocationToModify(row);
+                    setIsOpen(true);
+                  }}>
+                  <EditIcon />
                 </IconButton>
               </TableCell>
             </TableRow>
