@@ -57,6 +57,8 @@ export default function AdminConnected({
       updatedAt: "2023-06-13T20:55:48.000Z",
     },
   });
+  const [itemToDelete, setItemToDelete] = useState({});
+  const [deleteWhat, setDeleteWhat] = useState("");
 
   const navigate = useNavigate();
 
@@ -236,6 +238,7 @@ export default function AdminConnected({
                   setIsAddOpen={setIsAddEmployeOpen}
                   setIsDeleteOpen={setIsDeleteOpen}
                   setEmployeToModify={setEmployeToModify}
+                  setDeleteWhat={setDeleteWhat}
                 />
               </Grid>
             </Grid>
@@ -265,6 +268,9 @@ export default function AdminConnected({
                   rows={item}
                   title="Liste des items"
                   setAddOpen={setIsAddItemOpen}
+                  setIsDeleteOpen={setIsDeleteOpen}
+                  setItemToDelete={setItemToDelete}
+                  setDeleteWhat={setDeleteWhat}
                 />
               </Grid>
             </Grid>
@@ -375,7 +381,17 @@ export default function AdminConnected({
         currentPassage={currentPassage}
       />
 
-      <DialogSuppression open={isDeleteOpen} setIsOpen={setIsDeleteOpen} />
+      <DialogSuppression
+        open={isDeleteOpen}
+        setIsOpen={setIsDeleteOpen}
+        employeToModify={employeToModify}
+        setEmployeToModify={setEmployeToModify}
+        itemToDelete={itemToDelete}
+        setItemToDelete={setItemToDelete}
+        deleteWhat={deleteWhat}
+        setCurrentPassage={setCurrentPassage}
+        currentPassage={currentPassage}
+      />
     </>
   );
 }

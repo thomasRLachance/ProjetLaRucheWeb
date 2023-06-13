@@ -12,9 +12,17 @@ import {
   Stack,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import React from "react";
 
-export default function ItemTableModifiable({ rows, title, setAddOpen }) {
+export default function ItemTableModifiable({
+  rows,
+  title,
+  setAddOpen,
+  setIsDeleteOpen,
+  setItemToDelete,
+  setDeleteWhat,
+}) {
   return (
     <TableContainer component={Paper}>
       <Toolbar>
@@ -44,7 +52,18 @@ export default function ItemTableModifiable({ rows, title, setAddOpen }) {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="right">
+                {" "}
+                <IconButton
+                  color="error"
+                  onClick={() => {
+                    setDeleteWhat("item");
+                    setItemToDelete(row);
+                    setIsDeleteOpen(true);
+                  }}>
+                  <DeleteForeverIcon />
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

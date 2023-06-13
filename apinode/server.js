@@ -287,6 +287,27 @@ app.put("/users/:userId", async (req, res) => {
   }
 });
 
+// DELETE Endpoint to remove a user
+app.delete("/users/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Check if the user exists
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Delete the user
+    await user.destroy();
+
+    res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 // GET Endpoint to get a user from their username
 app.get("/users/:username", async (req, res) => {
   try {
@@ -407,6 +428,38 @@ app.put("/products/:productId", async (req, res) => {
     await product.save();
 
     res.json(product);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// DELETE Endpoint to delete a product only if its not associated to sales
+app.delete("/products/:productId", async (req, res) => {
+  try {
+    const { productId } = req.params;
+
+    // Check if the product exists
+    const product = await Product.findByPk(productId);
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    // Check if the product is associated with any sales
+    const associatedSales = await ProductSale.findOne({
+      where: { productLocationId: product.productId },
+    });
+
+    if (associatedSales) {
+      return res
+        .status(400)
+        .json({ error: "Product is associated with sales. Cannot delete." });
+    }
+
+    // Delete the product
+    await product.destroy();
+
+    res.json({ message: "Product deleted successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });

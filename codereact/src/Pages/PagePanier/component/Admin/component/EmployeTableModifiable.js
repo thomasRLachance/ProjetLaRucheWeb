@@ -23,6 +23,7 @@ export default function EmployeTableMofiable({
   setIsAddOpen,
   setIsDeleteOpen,
   setEmployeToModify,
+  setDeleteWhat,
 }) {
   const getLocation = (locationId) => {
     if (locationId === 2) {
@@ -72,7 +73,13 @@ export default function EmployeTableMofiable({
                   }}>
                   <EditIcon />
                 </IconButton>
-                <IconButton color="error" onClick={() => setIsDeleteOpen(true)}>
+                <IconButton
+                  color="error"
+                  onClick={() => {
+                    setDeleteWhat("employe");
+                    setEmployeToModify(row);
+                    setIsDeleteOpen(true);
+                  }}>
                   <DeleteForeverIcon />
                 </IconButton>
               </TableCell>
