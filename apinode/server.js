@@ -570,9 +570,13 @@ app.put("/sales", async (req, res) => {
 
     if (existingProductSale) {
       // If an existing entry is found, update the amount and total
-      existingProductSale.amount += amount;
+      existingProductSale.amount = amount;
+      const productLocation = await ProductLocation.findByPk(productLocationId);
+      if (!productLocation) {
+        return res.status(404).json({ error: "Product Location not found" });
+      }
       existingProductSale.total =
-        existingProductSale.amount * existingProductSale.ProductLocation.price;
+        existingProductSale.amount * productLocation.price;
       await existingProductSale.save(); // Save the updated entry
     } else {
       // If no existing entry is found, create a new product sale entry for the day

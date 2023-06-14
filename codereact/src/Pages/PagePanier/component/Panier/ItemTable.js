@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Grid,
   Paper,
@@ -10,12 +11,26 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ItemTableRow from "./component/itemTableRow";
 import moment from "moment/moment";
+import axios from "axios";
 
 export default function ItemTable({ items, user }) {
   const [total, setTotal] = useState(0);
+  const [pass, setPass] = useState(0);
+  const [sauveguarde, setSauvegarde] = useState(false);
+
+  useEffect(() => {
+    if (pass === 0) {
+      setPass(pass + 1);
+      if (sessionStorage.getItem("total") !== null) {
+        setTotal(parseFloat(sessionStorage.getItem("total")));
+      }
+    } else {
+      sessionStorage.setItem("total", total);
+    }
+  }, [total]);
 
   moment.locale("fr", {
     months:
@@ -84,10 +99,30 @@ export default function ItemTable({ items, user }) {
     },
   });
 
-  const today = moment().format("Do MMMM YYYY, h:mm:ss");
+  var [today, setToday] = useState(moment().format("Do MMMM YYYY, h:mm:ss"));
+
+  const handleSubmit = () => {
+    items.map((item) => {
+      axios
+        .put("http://localhost:3000/sales", {
+          productLocationId: item.productLocationId,
+          amount: parseFloat(sessionStorage.getItem("qte" + item.product.name)),
+        })
+        .then((response) => {
+          setToday(moment().format("Do MMMM YYYY, h:mm:ss"));
+          setSauvegarde(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  };
   return (
     <>
       <Grid container justifyContent="center" alignItems="center">
+        {sauveguarde && (
+          <Alert severity="success">Vous avez sauvegardé avec succès!</Alert>
+        )}
         <Paper
           elevation={3}
           sx={{
@@ -95,8 +130,7 @@ export default function ItemTable({ items, user }) {
             padding: 1,
             marginBottom: 2,
             marginTop: 2,
-          }}
-        >
+          }}>
           <TableContainer>
             <Typography variant="h4" gutterBottom>
               Bonjour {user.firstName}!
@@ -116,7 +150,6 @@ export default function ItemTable({ items, user }) {
               </TableHead>
               <TableBody>
                 {items.map((item) => {
-                  console.log("ITEM" + item);
                   return (
                     <ItemTableRow
                       item={item}
@@ -140,7 +173,10 @@ export default function ItemTable({ items, user }) {
                   <TableCell align="right"></TableCell>
                   <TableCell align="right"></TableCell>
                   <TableCell align="right">
-                    <Button variant="contained" color="secondary">
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={handleSubmit}>
                       Sauvegarder
                     </Button>
                   </TableCell>

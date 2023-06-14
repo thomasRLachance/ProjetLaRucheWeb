@@ -20,17 +20,25 @@ export default function PageProfil() {
     locationId: "",
   });
 
+  const [lastPassage, setLastPassage] = useState(0);
+  const [currentPassage, setCurrentPassage] = useState(0);
+
   useEffect(() => {
-    //Get user
-    axios
-      .get(`http://localhost:3000/users/${sessionStorage.getItem("username")}`)
-      .then((response) => {
-        setUser(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  });
+    if (currentPassage !== lastPassage || currentPassage === 0) {
+      //Get user
+      setLastPassage(currentPassage);
+      axios
+        .get(
+          `http://localhost:3000/users/${sessionStorage.getItem("username")}`
+        )
+        .then((response) => {
+          setUser(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [currentPassage]);
 
   return (
     <>
@@ -42,8 +50,7 @@ export default function PageProfil() {
         spacing={6}
         justifyContent="center"
         alignItems="center"
-        marginTop={0.1}
-      >
+        marginTop={0.1}>
         <Typography variant="h4">Bonjour {user.firstName}</Typography>
         <Grid item>
           <Paper
@@ -53,21 +60,18 @@ export default function PageProfil() {
               backgroundColor: "#9ab75f",
               padding: 1,
               marginBottom: 2,
-            }}
-          >
+            }}>
             <Stack direction="row" justifyContent="center" alignItems="center">
               <Typography
                 variant="h6"
                 component="div"
                 color="white"
-                gutterBottom
-              >
+                gutterBottom>
                 Information
               </Typography>
               <IconButton
                 color="primary"
-                onClick={() => setIsModifyEmployeOpen(true)}
-              >
+                onClick={() => setIsModifyEmployeOpen(true)}>
                 <EditIcon />
               </IconButton>
             </Stack>
@@ -77,8 +81,7 @@ export default function PageProfil() {
               spacing={2}
               justifyContent="center"
               alignItems="center"
-              marginBottom={2}
-            >
+              marginBottom={2}>
               <Grid item xs={11}>
                 <InformationTable user={user} title="Information" />
               </Grid>
@@ -90,6 +93,9 @@ export default function PageProfil() {
         open={isModifyEmployeOpen}
         setIsOpen={setIsModifyEmployeOpen}
         title="Modifier le profil"
+        currentPassage={currentPassage}
+        setCurrentPassage={setCurrentPassage}
+        user={user}
       />
     </>
   );
