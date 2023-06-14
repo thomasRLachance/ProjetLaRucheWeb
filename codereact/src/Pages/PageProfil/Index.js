@@ -17,7 +17,7 @@ export default function PageProfil() {
     firstName: "",
     lastName: "",
     privileges: "",
-    locationId: "",
+    locationId: null,
   });
 
   const [lastPassage, setLastPassage] = useState(0);

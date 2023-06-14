@@ -57,7 +57,7 @@ export default function PagePanier() {
     firstName: "",
     lastName: "",
     privileges: "",
-    locationId: "",
+    locationId: null,
   });
 
   useEffect(() => {

@@ -15,7 +15,7 @@ export default function PageCalendrier() {
     firstName: "",
     lastName: "",
     privileges: "",
-    locationId: "",
+    locationId: null,
   });
 
 
@@ -33,7 +33,7 @@ export default function PageCalendrier() {
 
   return (
     <>
-      {user.locationId === undefined && <Navigate replace to="/Erreur" />}
+      {user.locationId === 0 && <Navigate replace to="/Erreur" />}
       <HeaderConnected user={user} />
       <Grid container justifyContent="center" alignItems="center">
         <Paper
