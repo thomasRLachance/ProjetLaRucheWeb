@@ -34,7 +34,7 @@ export default function StoreTable({ rows, title }) {
                 "&:last-child td, &:last-child th": { border: 0 },
               }}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.product.name}
               </TableCell>
               <TableCell align="right">{row.price}</TableCell>
             </TableRow>
