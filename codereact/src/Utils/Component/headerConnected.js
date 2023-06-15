@@ -63,6 +63,7 @@ export default function HeaderConnected({ user }) {
         alignItems="center"
         marginRight={2}
       >
+        
         <Button onClick={navigateConnecter}>
           <CardMedia
             component="img"
@@ -70,10 +71,10 @@ export default function HeaderConnected({ user }) {
             alt="Logo"
             sx={{ maxHeight: 100, maxWidth: 125, margin: 1 }}
           />
-        </Button>
-        <Typography variant="h4" color="white">
+                  <Typography variant="h4" color="white">
           {getLocation(user.locationId)}
         </Typography>
+        </Button>
         <Typography variant="body1" color="white">
           <IconButton
             aria-controls={open ? "basic-menu" : undefined}

@@ -74,12 +74,13 @@ export default function DialogAddEmploye({
   const handleSubmit = () => {
     setError(false);
     var newUser = {};
+    var format = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,15}$/;
 
     if (
-      password !== "" &&
-      username !== "" &&
-      firstName !== "" &&
-      lastName !== "" &&
+      format.test(password.trim()) &&
+      username.trim().length >= 4 &&
+      firstName.trim().length >= 2 &&
+      lastName.trim().length >= 2 &&
       location !== 0
     ) {
       newUser = {
@@ -159,10 +160,17 @@ export default function DialogAddEmploye({
             </Grid>
           </Grid>
         </Grid>
-        {error && (
+        {error && (<>
           <Typography variant="body1" color="red">
-            Veuillez remplir tous les champs
+            Un prénom doit avoir au minimum 2 caractères, un nom de famille doit avoir au minimum 2 caractères.
           </Typography>
+          <Typography variant="body1" color="red">
+            Un nom d'utilisateur doit avoir au minimum 4 caractères, vous devez choisir une location.
+          </Typography>
+          <Typography variant="body1" color="red">
+          Un mot de passe doit avoir entre 6 et 15 caractères, contenir au minimum 1 lettre, contenir au minimum 1 chiffre et contenir au minimum 1 caractère spécial!
+          </Typography>
+          </>
         )}
         {!error && <br />}
       </DialogContent>

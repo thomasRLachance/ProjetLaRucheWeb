@@ -27,13 +27,23 @@ export default function PageCalendrier() {
         setUser(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        setUser({
+          userId: 1,
+          username: "",
+          password: "",
+          firstName: "",
+          lastName: "",
+          privileges: "",
+          locationId: "",
+        });
       });
   }, []);
 
   return (
     <>
-      {user.locationId === 0 && <Navigate replace to="/Erreur" />}
+    {user.locationId === 2 && <Navigate replace to="/Erreur" />}
+    {user.locationId === 3 && <Navigate replace to="/Erreur" />}
+      {user.locationId === "" && <Navigate replace to="/Erreur" />}
       <HeaderConnected user={user} />
       <Grid container justifyContent="center" alignItems="center">
         <Paper

@@ -69,6 +69,15 @@ export default function PagePanier() {
       })
       .catch((error) => {
         console.log(error);
+        setUser({
+          userId: 1,
+          username: "",
+          password: "",
+          firstName: "",
+          lastName: "",
+          privileges: "",
+          locationId: "",
+        });
       });
 
     //Get item
@@ -122,7 +131,7 @@ export default function PagePanier() {
       )}
       {user.locationId === 2 && <ItemTable items={store1} user={user} />}
       {user.locationId === 3 && <ItemTable items={store2} user={user} />}
-      {user.locationId === null && <Navigate replace to="/Erreur" />}
+      {user.locationId === "" && <Navigate replace to="/Erreur" />}
     </Grid>
   );
 }

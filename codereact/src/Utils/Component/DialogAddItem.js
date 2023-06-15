@@ -56,7 +56,7 @@ export default function DialogAddItem({
         </Grid>
         {error && (
           <Typography variant="body1" color="red">
-            Veuillez remplir tous le champ
+            Veuillez remplir le champ
           </Typography>
         )}
         {!error && <br />}

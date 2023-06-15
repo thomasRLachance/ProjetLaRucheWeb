@@ -347,7 +347,7 @@ export default function AdminConnected({
       />
       <DialogEditEmploye
         user={employeToModify}
-        title="Liste des employés"
+        title="Modifier un employé"
         open={isEmployeOpen}
         setIsOpen={setIsEmployeOpen}
         setCurrentPassage={setCurrentPassage}

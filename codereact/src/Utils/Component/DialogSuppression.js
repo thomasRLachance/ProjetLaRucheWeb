@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
 import axios from "axios";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export default function DialogSuppression({
   open,
@@ -13,6 +13,8 @@ export default function DialogSuppression({
   currentPassage,
   setCurrentPassage,
 }) {
+  const [errorItem, setErrorItem] = useState(false)
+
   const handleSubmit = () => {
     if (deleteWhat === "employe") {
       axios
@@ -35,19 +37,33 @@ export default function DialogSuppression({
         })
         .catch((err) => {
           console.log(err);
+          setErrorItem(true)
         });
     }
   };
 
   return (
     <Dialog open={open}>
-      <DialogTitle>
+      {!errorItem && <> <DialogTitle>
         Êtes-vous certain de vouloir supprimer cette élément?
       </DialogTitle>
       <DialogActions>
         <Button onClick={() => setIsOpen(false)}>NON</Button>
         <Button onClick={handleSubmit}>OUI</Button>
       </DialogActions>
+      </>
+      }
+      {errorItem && <> <DialogTitle>
+        Vous ne pouvez pas supprimer cette item. L'item est lié à une ou plusieures ventes!
+      </DialogTitle>
+      <DialogActions>
+        <Button onClick={() => {
+          setErrorItem(false)
+          setIsOpen(false)}
+          }>OK</Button>
+      </DialogActions>
+      </>
+      }
     </Dialog>
   );
 }

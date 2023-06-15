@@ -35,14 +35,22 @@ export default function PageProfil() {
           setUser(response.data);
         })
         .catch((error) => {
-          console.log(error);
+          setUser({
+            userId: 1,
+            username: "",
+            password: "",
+            firstName: "",
+            lastName: "",
+            privileges: "",
+            locationId: "",
+          });
         });
     }
   }, [currentPassage]);
 
   return (
     <>
-      {user.locationId === null && <Navigate replace to="/Erreur" />}
+      {user.locationId === "" && <Navigate replace to="/Erreur" />}
       <HeaderConnected user={user} />
       <Grid
         container
