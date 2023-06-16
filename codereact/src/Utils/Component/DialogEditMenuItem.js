@@ -49,7 +49,7 @@ export default function DialogEditMenuItem({
     if (price !== "") {
       axios
         .put(
-          `http://localhost:3000/productLocations/${item.productLocationId}`,
+          `https://laruche-api-2.fly.dev/productLocations/${item.productLocationId}`,
           {
             price: price,
             isActive: isActive,

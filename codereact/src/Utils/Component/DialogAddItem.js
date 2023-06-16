@@ -35,7 +35,7 @@ export default function DialogAddItem({
 
     if (name !== "") {
       axios
-        .post("http://localhost:3000/products", { name: name })
+        .post("https://laruche-api-2.fly.dev/products", { name: name })
         .then((reponse) => {
           setCurrentPassage(currentPassage + 1);
           setIsOpen(false);

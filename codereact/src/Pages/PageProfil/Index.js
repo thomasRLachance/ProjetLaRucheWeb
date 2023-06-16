@@ -29,7 +29,9 @@ export default function PageProfil() {
       setLastPassage(currentPassage);
       axios
         .get(
-          `http://localhost:3000/users/${sessionStorage.getItem("username")}`
+          `https://laruche-api-2.fly.dev/users/${sessionStorage.getItem(
+            "username"
+          )}`
         )
         .then((response) => {
           setUser(response.data);

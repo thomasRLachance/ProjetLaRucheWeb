@@ -13,12 +13,12 @@ export default function DialogSuppression({
   currentPassage,
   setCurrentPassage,
 }) {
-  const [errorItem, setErrorItem] = useState(false)
+  const [errorItem, setErrorItem] = useState(false);
 
   const handleSubmit = () => {
     if (deleteWhat === "employe") {
       axios
-        .delete(`http://localhost:3000/users/${employeToModify.userId}`)
+        .delete(`https://laruche-api-2.fly.dev/users/${employeToModify.userId}`)
         .then((response) => {
           setEmployeToModify({});
           setCurrentPassage(currentPassage + 1);
@@ -29,7 +29,9 @@ export default function DialogSuppression({
         });
     } else if (deleteWhat === "item") {
       axios
-        .delete(`http://localhost:3000/products/${itemToDelete.productId}`)
+        .delete(
+          `https://laruche-api-2.fly.dev/products/${itemToDelete.productId}`
+        )
         .then((response) => {
           setItemToDelete({});
           setCurrentPassage(currentPassage + 1);
@@ -37,33 +39,43 @@ export default function DialogSuppression({
         })
         .catch((err) => {
           console.log(err);
-          setErrorItem(true)
+          setErrorItem(true);
         });
     }
   };
 
   return (
     <Dialog open={open}>
-      {!errorItem && <> <DialogTitle>
-        Êtes-vous certain de vouloir supprimer cette élément?
-      </DialogTitle>
-      <DialogActions>
-        <Button onClick={() => setIsOpen(false)}>NON</Button>
-        <Button onClick={handleSubmit}>OUI</Button>
-      </DialogActions>
-      </>
-      }
-      {errorItem && <> <DialogTitle>
-        Vous ne pouvez pas supprimer cette item. L'item est lié à une ou plusieures ventes!
-      </DialogTitle>
-      <DialogActions>
-        <Button onClick={() => {
-          setErrorItem(false)
-          setIsOpen(false)}
-          }>OK</Button>
-      </DialogActions>
-      </>
-      }
+      {!errorItem && (
+        <>
+          {" "}
+          <DialogTitle>
+            Êtes-vous certain de vouloir supprimer cette élément?
+          </DialogTitle>
+          <DialogActions>
+            <Button onClick={() => setIsOpen(false)}>NON</Button>
+            <Button onClick={handleSubmit}>OUI</Button>
+          </DialogActions>
+        </>
+      )}
+      {errorItem && (
+        <>
+          {" "}
+          <DialogTitle>
+            Vous ne pouvez pas supprimer cette item. L'item est lié à une ou
+            plusieures ventes!
+          </DialogTitle>
+          <DialogActions>
+            <Button
+              onClick={() => {
+                setErrorItem(false);
+                setIsOpen(false);
+              }}>
+              OK
+            </Button>
+          </DialogActions>
+        </>
+      )}
     </Dialog>
   );
 }

@@ -7,7 +7,6 @@ import { Grid, Paper, Typography } from "@mui/material";
 import axios from "axios";
 
 export default function PageCalendrier() {
-
   const [user, setUser] = useState({
     userId: 1,
     username: "",
@@ -18,11 +17,14 @@ export default function PageCalendrier() {
     locationId: null,
   });
 
-
   useEffect(() => {
     //Get user
     axios
-      .get(`http://localhost:3000/users/${sessionStorage.getItem("username")}`)
+      .get(
+        `https://laruche-api-2.fly.dev/users/${sessionStorage.getItem(
+          "username"
+        )}`
+      )
       .then((response) => {
         setUser(response.data);
       })
@@ -41,8 +43,8 @@ export default function PageCalendrier() {
 
   return (
     <>
-    {user.locationId === 2 && <Navigate replace to="/Erreur" />}
-    {user.locationId === 3 && <Navigate replace to="/Erreur" />}
+      {user.locationId === 2 && <Navigate replace to="/Erreur" />}
+      {user.locationId === 3 && <Navigate replace to="/Erreur" />}
       {user.locationId === "" && <Navigate replace to="/Erreur" />}
       <HeaderConnected user={user} />
       <Grid container justifyContent="center" alignItems="center">
@@ -52,8 +54,7 @@ export default function PageCalendrier() {
             width: 1000,
             padding: 1,
             marginBottom: 2,
-          }}
-        >
+          }}>
           <Typography variant="h3" gutterBottom>
             Historique des ventes
           </Typography>

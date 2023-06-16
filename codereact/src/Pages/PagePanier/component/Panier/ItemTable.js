@@ -104,7 +104,7 @@ export default function ItemTable({ items, user }) {
   const handleSubmit = () => {
     items.map((item) => {
       axios
-        .put("http://localhost:3000/sales", {
+        .put("https://laruche-api-2.fly.dev/sales", {
           productLocationId: item.productLocationId,
           amount: parseFloat(sessionStorage.getItem("qte" + item.product.name)),
         })

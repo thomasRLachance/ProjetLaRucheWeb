@@ -93,10 +93,12 @@ export default function DialogAddEmploye({
         privileges: location,
       };
 
-      axios.post("http://localhost:3000/users", newUser).then((reponse) => {
-        setCurrentPassage(currentPassage + 1);
-        setIsOpen(false);
-      });
+      axios
+        .post("https://laruche-api-2.fly.dev/users", newUser)
+        .then((reponse) => {
+          setCurrentPassage(currentPassage + 1);
+          setIsOpen(false);
+        });
     } else {
       setError(true);
     }
@@ -160,16 +162,21 @@ export default function DialogAddEmploye({
             </Grid>
           </Grid>
         </Grid>
-        {error && (<>
-          <Typography variant="body1" color="red">
-            Un prénom doit avoir au minimum 2 caractères, un nom de famille doit avoir au minimum 2 caractères.
-          </Typography>
-          <Typography variant="body1" color="red">
-            Un nom d'utilisateur doit avoir au minimum 4 caractères, vous devez choisir une location.
-          </Typography>
-          <Typography variant="body1" color="red">
-          Un mot de passe doit avoir entre 6 et 15 caractères, contenir au minimum 1 lettre, contenir au minimum 1 chiffre et contenir au minimum 1 caractère spécial!
-          </Typography>
+        {error && (
+          <>
+            <Typography variant="body1" color="red">
+              Un prénom doit avoir au minimum 2 caractères, un nom de famille
+              doit avoir au minimum 2 caractères.
+            </Typography>
+            <Typography variant="body1" color="red">
+              Un nom d'utilisateur doit avoir au minimum 4 caractères, vous
+              devez choisir une location.
+            </Typography>
+            <Typography variant="body1" color="red">
+              Un mot de passe doit avoir entre 6 et 15 caractères, contenir au
+              minimum 1 lettre, contenir au minimum 1 chiffre et contenir au
+              minimum 1 caractère spécial!
+            </Typography>
           </>
         )}
         {!error && <br />}

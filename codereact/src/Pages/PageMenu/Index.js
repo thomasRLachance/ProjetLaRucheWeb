@@ -12,7 +12,7 @@ export default function PageMenu() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/locations/1/productLocations")
+      .get("https://laruche-api-2.fly.dev/locations/1/productLocations")
       .then((response) => {
         setStore1(response.data);
       })
@@ -23,7 +23,7 @@ export default function PageMenu() {
     //Get menu cafe
 
     axios
-      .get("http://localhost:3000/locations/2/productLocations")
+      .get("https://laruche-api-2.fly.dev/locations/2/productLocations")
       .then((response) => {
         setStore2(response.data);
       })

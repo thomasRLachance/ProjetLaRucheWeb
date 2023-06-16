@@ -123,7 +123,9 @@ export default function AdminConnected({
     if (currentPassage !== lastPassage || currentPassage === 0) {
       axios
         .get(
-          `http://localhost:3000/users/${sessionStorage.getItem("username")}`
+          `https://laruche-api-2.fly.dev/users/${sessionStorage.getItem(
+            "username"
+          )}`
         )
         .then((response) => {
           setUser(response.data);
@@ -136,7 +138,7 @@ export default function AdminConnected({
 
       setLastPassage(currentPassage);
       axios
-        .get("http://localhost:3000/users")
+        .get("https://laruche-api-2.fly.dev/users")
         .then((response) => {
           setEmploye(response.data);
         })
@@ -147,7 +149,7 @@ export default function AdminConnected({
     //Get item
 
     axios
-      .get("http://localhost:3000/products")
+      .get("https://laruche-api-2.fly.dev/products")
       .then((response) => {
         setItem(response.data);
       })
@@ -158,7 +160,7 @@ export default function AdminConnected({
     //Get menu bistro
 
     axios
-      .get("http://localhost:3000/locations/1/productLocations")
+      .get("https://laruche-api-2.fly.dev/locations/1/productLocations")
       .then((response) => {
         setStore1(response.data);
       })
@@ -169,7 +171,7 @@ export default function AdminConnected({
     //Get menu cafe
 
     axios
-      .get("http://localhost:3000/locations/2/productLocations")
+      .get("https://laruche-api-2.fly.dev/locations/2/productLocations")
       .then((response) => {
         setStore2(response.data);
       })
@@ -366,7 +368,7 @@ export default function AdminConnected({
         open={isAddItemOpenBistro}
         setIsOpen={setIsAddItemOpenBistro}
         availableItem={availableItemBistro}
-        url="http://localhost:3000/locations/1/productLocations"
+        url="https://laruche-api-2.fly.dev/locations/1/productLocations"
         setCurrentPassage={setCurrentPassage}
         currentPassage={currentPassage}
       />
@@ -376,7 +378,7 @@ export default function AdminConnected({
         open={isAddItemOpenCafe}
         setIsOpen={setIsAddItemOpenCafe}
         availableItem={availableItemCafe}
-        url="http://localhost:3000/locations/2/productLocations"
+        url="https://laruche-api-2.fly.dev/locations/2/productLocations"
         setCurrentPassage={setCurrentPassage}
         currentPassage={currentPassage}
       />

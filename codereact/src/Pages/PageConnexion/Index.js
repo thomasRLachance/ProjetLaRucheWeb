@@ -39,7 +39,7 @@ export default function PageConnexion() {
 
   const handleLogin = () => {
     axios
-      .post("http://localhost:3000/login", {
+      .post("https://laruche-api-2.fly.dev/login", {
         username: username,
         password: password,
       })
@@ -71,13 +71,11 @@ export default function PageConnexion() {
             width: 450,
             marginBottom: 3,
             backgroundColor: "#9ab75f",
-          }}
-        >
+          }}>
           <Paper
             sx={{
               p: 2,
-            }}
-          >
+            }}>
             <Box component="span">
               <Typography variant="h4" gutterBottom>
                 S'identifier
@@ -107,20 +105,17 @@ export default function PageConnexion() {
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
-                spacing={2}
-              >
+                spacing={2}>
                 <Button
                   variant="contained"
                   color="error"
-                  onClick={navigateHome}
-                >
+                  onClick={navigateHome}>
                   Retour
                 </Button>
                 <Button
                   onClick={handleSubmit}
                   variant="contained"
-                  color="secondary"
-                >
+                  color="secondary">
                   Se connecter
                 </Button>
               </Stack>
