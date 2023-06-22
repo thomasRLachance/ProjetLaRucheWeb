@@ -42,7 +42,7 @@ export default function DialogAddMenuItem({
     setError(false);
     if (item !== -1 && prix !== -1) {
       axios
-        .post(url, { productId: item, price: prix }, headers)
+        .post(url, { productId: item, price: prix }, { headers })
         .then((response) => {
           setCurrentPassage(currentPassage + 1);
           setIsOpen(false);

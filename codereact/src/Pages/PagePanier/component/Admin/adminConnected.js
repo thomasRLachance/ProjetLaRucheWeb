@@ -128,7 +128,7 @@ export default function AdminConnected({
       axios
         .get(
           `https://laruche-api-2.fly.dev/users/${
-            (sessionStorage.getItem("username"), headers)
+            (sessionStorage.getItem("username"), { headers })
           }`
         )
         .then((response) => {
@@ -142,7 +142,7 @@ export default function AdminConnected({
 
       setLastPassage(currentPassage);
       axios
-        .get("https://laruche-api-2.fly.dev/users", headers)
+        .get("https://laruche-api-2.fly.dev/users", { headers })
         .then((response) => {
           setEmploye(response.data);
         })
@@ -153,7 +153,7 @@ export default function AdminConnected({
     //Get item
 
     axios
-      .get("https://laruche-api-2.fly.dev/products", headers)
+      .get("https://laruche-api-2.fly.dev/products", { headers })
       .then((response) => {
         setItem(response.data);
       })

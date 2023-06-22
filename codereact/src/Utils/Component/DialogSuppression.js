@@ -24,7 +24,7 @@ export default function DialogSuppression({
       axios
         .delete(
           `https://laruche-api-2.fly.dev/users/${employeToModify.userId}`,
-          headers
+          { headers }
         )
         .then((response) => {
           setEmployeToModify({});
@@ -37,7 +37,8 @@ export default function DialogSuppression({
     } else if (deleteWhat === "item") {
       axios
         .delete(
-          `https://laruche-api-2.fly.dev/products/${itemToDelete.productId}`
+          `https://laruche-api-2.fly.dev/products/${itemToDelete.productId}`,
+          { headers }
         )
         .then((response) => {
           setItemToDelete({});

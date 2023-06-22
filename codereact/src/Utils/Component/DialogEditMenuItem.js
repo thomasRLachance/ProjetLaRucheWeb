@@ -58,7 +58,7 @@ export default function DialogEditMenuItem({
             price: price,
             isActive: isActive,
           },
-          headers
+          { headers }
         )
         .then((response) => {
           setCurrentPassage(currentPassage + 1);

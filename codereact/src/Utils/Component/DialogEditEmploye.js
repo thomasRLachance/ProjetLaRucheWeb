@@ -126,11 +126,9 @@ export default function DialogEditEmploye({
 
     if (Object.keys(newUser).length !== 0) {
       axios
-        .put(
-          `https://laruche-api-2.fly.dev/users/${user.userId}`,
-          newUser,
-          headers
-        )
+        .put(`https://laruche-api-2.fly.dev/users/${user.userId}`, newUser, {
+          headers,
+        })
         .then((response) => {
           setCurrentPassage(currentPassage + 1);
           setIsOpen(false);

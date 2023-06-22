@@ -98,7 +98,7 @@ export default function DialogAddEmploye({
       };
 
       axios
-        .post("https://laruche-api-2.fly.dev/users", newUser, headers)
+        .post("https://laruche-api-2.fly.dev/users", newUser, { headers })
         .then((reponse) => {
           setCurrentPassage(currentPassage + 1);
           setIsOpen(false);

@@ -88,11 +88,9 @@ export default function DialogEditProfil({
 
     if (Object.keys(newUser).length !== 0) {
       axios
-        .put(
-          `https://laruche-api-2.fly.dev/users/${user.userId}`,
-          newUser,
-          headers
-        )
+        .put(`https://laruche-api-2.fly.dev/users/${user.userId}`, newUser, {
+          headers,
+        })
         .then((response) => {
           if (newUser.username) {
             sessionStorage.setItem("username", username);

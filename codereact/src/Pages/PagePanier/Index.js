@@ -91,7 +91,7 @@ export default function PagePanier() {
     //Get item
 
     axios
-      .get("https://laruche-api-2.fly.dev/products", headers)
+      .get("https://laruche-api-2.fly.dev/products", { headers })
       .then((response) => {
         setItem(response.data);
       })
