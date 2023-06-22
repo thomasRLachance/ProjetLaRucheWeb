@@ -13,12 +13,19 @@ export default function DialogSuppression({
   currentPassage,
   setCurrentPassage,
 }) {
+  const token = sessionStorage.getItem("token");
+
+  const headers = { Authorization: token }; // auth header with bearer token
+
   const [errorItem, setErrorItem] = useState(false);
 
   const handleSubmit = () => {
     if (deleteWhat === "employe") {
       axios
-        .delete(`https://laruche-api-2.fly.dev/users/${employeToModify.userId}`)
+        .delete(
+          `https://laruche-api-2.fly.dev/users/${employeToModify.userId}`,
+          headers
+        )
         .then((response) => {
           setEmployeToModify({});
           setCurrentPassage(currentPassage + 1);
@@ -70,7 +77,8 @@ export default function DialogSuppression({
               onClick={() => {
                 setErrorItem(false);
                 setIsOpen(false);
-              }}>
+              }}
+            >
               OK
             </Button>
           </DialogActions>

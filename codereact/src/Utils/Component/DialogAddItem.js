@@ -18,6 +18,10 @@ export default function DialogAddItem({
   setCurrentPassage,
   currentPassage,
 }) {
+  const token = sessionStorage.getItem("token");
+
+  const headers = { Authorization: token }; // auth header with bearer token
+
   const [name, setName] = useState("");
   const [error, setError] = useState(false);
 
@@ -35,7 +39,7 @@ export default function DialogAddItem({
 
     if (name !== "") {
       axios
-        .post("https://laruche-api-2.fly.dev/products", { name: name })
+        .post("https://laruche-api-2.fly.dev/products", { name: name }, headers)
         .then((reponse) => {
           setCurrentPassage(currentPassage + 1);
           setIsOpen(false);

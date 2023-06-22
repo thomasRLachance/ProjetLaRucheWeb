@@ -23,6 +23,10 @@ export default function AdminConnected({
   setStore1,
   setStore2,
 }) {
+  const token = sessionStorage.getItem("token");
+
+  const headers = { Authorization: token }; // auth header with bearer token
+
   const [isBistroOpen, setIsBistroOpen] = useState(false);
   const [isCafeOpen, setIsCafeOpen] = useState(false);
   const [isEmployeOpen, setIsEmployeOpen] = useState(false);
@@ -123,9 +127,9 @@ export default function AdminConnected({
     if (currentPassage !== lastPassage || currentPassage === 0) {
       axios
         .get(
-          `https://laruche-api-2.fly.dev/users/${sessionStorage.getItem(
-            "username"
-          )}`
+          `https://laruche-api-2.fly.dev/users/${
+            (sessionStorage.getItem("username"), headers)
+          }`
         )
         .then((response) => {
           setUser(response.data);
@@ -138,7 +142,7 @@ export default function AdminConnected({
 
       setLastPassage(currentPassage);
       axios
-        .get("https://laruche-api-2.fly.dev/users")
+        .get("https://laruche-api-2.fly.dev/users", headers)
         .then((response) => {
           setEmploye(response.data);
         })
@@ -149,7 +153,7 @@ export default function AdminConnected({
     //Get item
 
     axios
-      .get("https://laruche-api-2.fly.dev/products")
+      .get("https://laruche-api-2.fly.dev/products", headers)
       .then((response) => {
         setItem(response.data);
       })
@@ -193,7 +197,8 @@ export default function AdminConnected({
         spacing={6}
         justifyContent="center"
         alignItems="center"
-        marginTop={0.1}>
+        marginTop={0.1}
+      >
         <Typography variant="h4" gutterBottom>
           Bonjour {user.firstName}!
         </Typography>
@@ -204,7 +209,8 @@ export default function AdminConnected({
               width: 1000,
               height: 70,
               backgroundColor: "#9ab75f",
-            }}>
+            }}
+          >
             <Typography variant="h6" component="div" color="white" gutterBottom>
               Accès modifier calendrier
               <IconButton color="primary" onClick={navigateCalendar}>
@@ -221,7 +227,8 @@ export default function AdminConnected({
               backgroundColor: "#9ab75f",
               padding: 1,
               marginBottom: 2,
-            }}>
+            }}
+          >
             <Typography variant="h6" component="div" color="white" gutterBottom>
               EMPLOYÉS
             </Typography>
@@ -231,7 +238,8 @@ export default function AdminConnected({
               spacing={2}
               justifyContent="center"
               alignItems="center"
-              marginBottom={2}>
+              marginBottom={2}
+            >
               <Grid item xs={11}>
                 <EmployeTableMofiable
                   rows={employe}
@@ -254,7 +262,8 @@ export default function AdminConnected({
               backgroundColor: "#9ab75f",
               padding: 1,
               marginBottom: 2,
-            }}>
+            }}
+          >
             <Typography variant="h6" component="div" color="white" gutterBottom>
               Items
             </Typography>
@@ -264,7 +273,8 @@ export default function AdminConnected({
               spacing={2}
               justifyContent="center"
               alignItems="center"
-              marginBottom={2}>
+              marginBottom={2}
+            >
               <Grid item xs={11}>
                 <ItemTableModifiable
                   rows={item}
@@ -286,7 +296,8 @@ export default function AdminConnected({
               backgroundColor: "#9ab75f",
               padding: 1,
               marginBottom: 2,
-            }}>
+            }}
+          >
             <Typography variant="h6" component="div" color="white" gutterBottom>
               MENU
             </Typography>
@@ -295,7 +306,8 @@ export default function AdminConnected({
               direction="row"
               spacing={2}
               marginLeft={2}
-              marginBottom={2}>
+              marginBottom={2}
+            >
               <Grid item xs={6}>
                 <StoreTableMofiable
                   rows={store1}

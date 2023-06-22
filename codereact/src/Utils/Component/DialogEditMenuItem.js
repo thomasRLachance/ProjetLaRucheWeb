@@ -26,6 +26,10 @@ export default function DialogEditMenuItem({
   setCurrentPassage,
   currentPassage,
 }) {
+  const token = sessionStorage.getItem("token");
+
+  const headers = { Authorization: token }; // auth header with bearer token
+
   const [price, setPrice] = useState("");
   const [isActive, setIsActive] = useState(true);
   const [error, setError] = useState(false);
@@ -53,7 +57,8 @@ export default function DialogEditMenuItem({
           {
             price: price,
             isActive: isActive,
-          }
+          },
+          headers
         )
         .then((response) => {
           setCurrentPassage(currentPassage + 1);
@@ -90,7 +95,8 @@ export default function DialogEditMenuItem({
               key={item.productId}
               sx={{
                 "&:last-child td, &:last-child th": { border: 0 },
-              }}>
+              }}
+            >
               <TableCell component="th" scope="row">
                 {item.product.name}
               </TableCell>

@@ -18,6 +18,10 @@ export default function DialogEditProfil({
   setCurrentPassage,
   user,
 }) {
+  const token = sessionStorage.getItem("token");
+
+  const headers = { Authorization: token }; // auth header with bearer token
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
@@ -84,7 +88,11 @@ export default function DialogEditProfil({
 
     if (Object.keys(newUser).length !== 0) {
       axios
-        .put(`https://laruche-api-2.fly.dev/users/${user.userId}`, newUser)
+        .put(
+          `https://laruche-api-2.fly.dev/users/${user.userId}`,
+          newUser,
+          headers
+        )
         .then((response) => {
           if (newUser.username) {
             sessionStorage.setItem("username", username);

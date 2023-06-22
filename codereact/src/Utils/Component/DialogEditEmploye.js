@@ -24,6 +24,10 @@ export default function DialogEditEmploye({
   setCurrentPassage,
   currentPassage,
 }) {
+  const token = sessionStorage.getItem("token");
+
+  const headers = { Authorization: token }; // auth header with bearer token
+
   const locations = [
     {
       value: 1,
@@ -122,7 +126,11 @@ export default function DialogEditEmploye({
 
     if (Object.keys(newUser).length !== 0) {
       axios
-        .put(`https://laruche-api-2.fly.dev/users/${user.userId}`, newUser)
+        .put(
+          `https://laruche-api-2.fly.dev/users/${user.userId}`,
+          newUser,
+          headers
+        )
         .then((response) => {
           setCurrentPassage(currentPassage + 1);
           setIsOpen(false);
@@ -150,14 +158,16 @@ export default function DialogEditEmploye({
             container
             direction="column"
             justifyContent="center"
-            alignItems="center">
+            alignItems="center"
+          >
             <Grid
               container
               direction="row"
               justifyContent="center"
               alignItems="center"
               spacing={1}
-              padding={2}>
+              padding={2}
+            >
               <Grid item xs={6}>
                 <TextField
                   defaultValue={user.firstName}
@@ -179,7 +189,8 @@ export default function DialogEditEmploye({
                   fullWidth
                   variant="outlined"
                   onChange={handleChangeLocation}
-                  value={location}>
+                  value={location}
+                >
                   {locations.map((site) => (
                     <MenuItem key={site.value} value={site.value}>
                       {site.label}

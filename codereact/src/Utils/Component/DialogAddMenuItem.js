@@ -22,6 +22,10 @@ export default function DialogAddMenuItem({
   currentPassage,
   setCurrentPassage,
 }) {
+  const token = sessionStorage.getItem("token");
+
+  const headers = { Authorization: token }; // auth header with bearer token
+
   const [item, setItem] = useState(-1);
   const [prix, setPrix] = useState(-1);
   const [error, setError] = useState(false);
@@ -38,7 +42,7 @@ export default function DialogAddMenuItem({
     setError(false);
     if (item !== -1 && prix !== -1) {
       axios
-        .post(url, { productId: item, price: prix })
+        .post(url, { productId: item, price: prix }, headers)
         .then((response) => {
           setCurrentPassage(currentPassage + 1);
           setIsOpen(false);
@@ -67,7 +71,8 @@ export default function DialogAddMenuItem({
               fullWidth
               variant="outlined"
               onChange={handleChangeItem}
-              value={item}>
+              value={item}
+            >
               {availableItem.map((item) => (
                 <MenuItem key={item.productId} value={item.productId}>
                   {item.name}

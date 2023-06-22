@@ -7,6 +7,10 @@ import ItemTable from "./component/Panier/ItemTable";
 import axios from "axios";
 
 export default function PagePanier() {
+  const token = sessionStorage.getItem("token");
+
+  const headers = { Authorization: token }; // auth header with bearer token
+
   const [item, setItem] = useState([
     {
       productId: 1,
@@ -87,7 +91,7 @@ export default function PagePanier() {
     //Get item
 
     axios
-      .get("https://laruche-api-2.fly.dev/products")
+      .get("https://laruche-api-2.fly.dev/products", headers)
       .then((response) => {
         setItem(response.data);
       })

@@ -20,6 +20,10 @@ export default function DialogAddEmploye({
   setCurrentPassage,
   currentPassage,
 }) {
+  const token = sessionStorage.getItem("token");
+
+  const headers = { Authorization: token }; // auth header with bearer token
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [location, setLocation] = useState(0);
@@ -94,7 +98,7 @@ export default function DialogAddEmploye({
       };
 
       axios
-        .post("https://laruche-api-2.fly.dev/users", newUser)
+        .post("https://laruche-api-2.fly.dev/users", newUser, headers)
         .then((reponse) => {
           setCurrentPassage(currentPassage + 1);
           setIsOpen(false);
@@ -111,14 +115,16 @@ export default function DialogAddEmploye({
           container
           direction="column"
           justifyContent="center"
-          alignItems="center">
+          alignItems="center"
+        >
           <Grid
             container
             direction="row"
             justifyContent="center"
             alignItems="center"
             spacing={1}
-            padding={2}>
+            padding={2}
+          >
             <Grid item xs={6}>
               <TextField
                 label="Prénom"
@@ -138,7 +144,8 @@ export default function DialogAddEmploye({
                 fullWidth
                 variant="outlined"
                 onChange={handleChangeLocation}
-                value={location}>
+                value={location}
+              >
                 {locations.map((site) => (
                   <MenuItem key={site.value} value={site.value}>
                     {site.label}
